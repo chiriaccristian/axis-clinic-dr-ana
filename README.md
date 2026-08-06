@@ -13,21 +13,14 @@ This repository demonstrates a production-ready React monorepo with:
 
 - **2 Applications**
 
-  - `shop` - React e-commerce application with product listings and detail views
+  - `clinic` - React application for the new clinic landing experience
   - `api` - Backend API serving product data
 
-- **7 Libraries**
+- **3 Libraries**
 
-  - `@org/shop-feature-products` - Product listing feature (React)
-  - `@org/shop-feature-product-detail` - Product detail feature (React)
-  - `@org/shop-data` - Data access layer for shop features
-  - `@org/shop-shared-ui` - Shared UI components
   - `@org/models` - Shared data models
   - `@org/api-products` - API product service library
   - `@org/shared-test-utils` - Shared testing utilities
-
-- **E2E Testing**
-  - `shop-e2e` - Playwright tests for the shop application
 
 ## 🚀 Quick Start
 
@@ -36,34 +29,39 @@ This repository demonstrates a production-ready React monorepo with:
 git clone <your-fork-url>
 cd <your-repository-name>
 
+# Use the required Node.js version
+nvm use
+
 # Install dependencies
 npm install
 
-# Serve the React shop application (this will simultaneously serve the API backend)
-npx nx run @org/shop:serve
+# Reset Nx daemon/cache if you previously ran with a different Node version
+npm exec nx reset
+
+# Serve the React clinic application
+npm exec nx run @org/clinic:serve
 
 # ...or you can serve the API separately
-npx nx run @org/api:serve
+npm exec nx run @org/api:serve
 
 # Build all projects
-npx nx run-many -t build
+npm exec nx run-many -t build
 
 # Run tests
-npx nx run-many -t test
+npm exec nx run-many -t test
 
 # Lint all projects
-npx nx run-many -t lint
-
-# Run e2e tests
-npx nx run @org/shop-e2e:e2e
+npm exec nx run-many -t lint
 
 # Run tasks in parallel
 
-npx nx run-many -t lint test build e2e --parallel=3
+npm exec nx run-many -t lint test build --parallel=3
 
 # Visualize the project graph
-npx nx graph
+npm exec nx graph
 ```
+
+> This workspace requires Node.js `^20.19.0 || >=22.12.0`.
 
 ## ⭐ Featured Nx Capabilities
 
@@ -74,48 +72,46 @@ This repository showcases several powerful Nx features:
 Enforces architectural constraints using tags. Each project has specific dependencies it can use:
 
 - `scope:shared` - Can be used by all projects
-- `scope:shop` - Shop-specific libraries
+- `scope:clinic` - Clinic-specific application code
 - `scope:api` - API-specific libraries
-- `type:feature` - Feature libraries
 - `type:data` - Data access libraries
-- `type:ui` - UI component libraries
 
 **Try it out:**
 
 ```bash
 # See the current project graph and boundaries
-npx nx graph
+npm exec nx graph
 
 # View a specific project's details
-npx nx show project @org/shop --web
+npm exec nx show project @org/clinic --web
 ```
 
 [Learn more about module boundaries →](https://nx.dev/docs/features/enforce-module-boundaries)
 
-### 2. 🎭 Playwright E2E Testing
+### 2. ⚡ Vite Development Workflow
 
-End-to-end testing with Playwright is pre-configured:
+Fast local development with Vite for frontend projects:
 
 ```bash
-# Run e2e tests
-npx nx run @org/shop-e2e:e2e
+# Run clinic in dev mode
+npm exec nx run @org/clinic:dev
 
-# Run e2e tests in CI mode
-npx nx run @org/shop-e2e:e2e-ci
+# Build clinic for production
+npm exec nx run @org/clinic:build
 ```
 
-[Learn more about E2E testing →](https://nx.dev/docs/technologies/test-tools/playwright)
+[Learn more about Vite →](https://nx.dev/docs/technologies/build-tools/vite)
 
-### 3. ⚡ Vitest for Unit Testing
+### 3. 🧪 Vitest for Unit Testing
 
 Fast unit testing with Vitest for React libraries:
 
 ```bash
 # Test a specific library
-npx nx run @org/shop-data:test
+npm exec nx run @org/shared-test-utils:test
 
 # Test all projects
-npx nx run-many -t test
+npm exec nx run-many -t test
 ```
 
 [Learn more about Vite testing →](https://nx.dev/docs/technologies/build-tools/vite)
@@ -126,7 +122,7 @@ The CI pipeline includes `nx fix-ci` which automatically identifies and suggests
 
 ```bash
 # In CI, this command provides automated fixes
-npx nx fix-ci
+npm exec nx fix-ci
 ```
 
 This feature helps maintain a healthy CI pipeline by automatically detecting and suggesting solutions for:
@@ -142,15 +138,9 @@ This feature helps maintain a healthy CI pipeline by automatically detecting and
 
 ```
 ├── apps/
-│   ├── shop/           [scope:shop]    - React e-commerce app
-│   ├── shop-e2e/                       - E2E tests for shop
+│   ├── clinic/         [scope:clinic]  - React clinic app
 │   └── api/            [scope:api]     - Backend API
 ├── packages/
-│   ├── shop/
-│   │   ├── feature-products/        [scope:shop,type:feature] - Product listing
-│   │   ├── feature-product-detail/  [scope:shop,type:feature] - Product details
-│   │   ├── data/                    [scope:shop,type:data]    - Data access
-│   │   └── shared-ui/               [scope:shop,type:ui]      - UI components
 │   ├── api/
 │   │   └── products/    [scope:api]    - Product service
 │   └── shared/
@@ -165,37 +155,35 @@ This feature helps maintain a healthy CI pipeline by automatically detecting and
 
 This repository uses tags to enforce module boundaries:
 
-| Project                 | Tags                         | Can Import From              |
-| ----------------------- | ---------------------------- | ---------------------------- |
-| `shop`                  | `scope:shop`                 | `scope:shop`, `scope:shared` |
-| `api`                   | `scope:api`                  | `scope:api`, `scope:shared`  |
-| `shop-feature-products` | `scope:shop`, `type:feature` | `scope:shop`, `scope:shared` |
-| `shop-data`             | `scope:shop`, `type:data`    | `scope:shared`               |
-| `models`                | `scope:shared`, `type:data`  | Nothing (base library)       |
+| Project  | Tags                        | Can Import From             |
+| -------- | --------------------------- | --------------------------- |
+| `clinic` | `scope:clinic`              | `scope:shared`              |
+| `api`    | `scope:api`                 | `scope:api`, `scope:shared` |
+| `models` | `scope:shared`, `type:data` | Nothing (base library)      |
 
 ## 📚 Useful Commands
 
 ```bash
 # Project exploration
-npx nx graph                                    # Interactive dependency graph
-npx nx list                                     # List installed plugins
-npx nx show project @org/shop --web                 # View project details
+npm exec nx graph                               # Interactive dependency graph
+npm exec nx list                                # List installed plugins
+npm exec nx show project @org/clinic --web      # View project details
 
 # Development
-npx nx run @org/shop:serve                              # Serve React app
-npx nx run @org/api:serve                               # Serve backend API
-npx nx run @org/shop:build                              # Build React app
-npx nx run @org/shop-data:test                          # Test a specific library
-npx nx run @org/shop-feature-products:lint              # Lint a specific library
+npm exec nx run @org/clinic:serve                # Serve clinic app
+npm exec nx run @org/api:serve                   # Serve backend API
+npm exec nx run @org/clinic:build                # Build clinic app
+npm exec nx run @org/shared-test-utils:test      # Test a specific library
+npm exec nx run @org/api-products:lint           # Lint a specific library
 
 # Running multiple tasks
-npx nx run-many -t build                       # Build all projects
-npx nx run-many -t test --parallel=3          # Test in parallel
-npx nx run-many -t lint test build            # Run multiple targets
+npm exec nx run-many -t build                  # Build all projects
+npm exec nx run-many -t test --parallel=3      # Test in parallel
+npm exec nx run-many -t lint test build        # Run multiple targets
 
 # Affected commands (great for CI)
-npx nx affected -t build                       # Build only affected projects
-npx nx affected -t test                        # Test only affected projects
+npm exec nx affected -t build                  # Build only affected projects
+npm exec nx affected -t test                   # Test only affected projects
 ```
 
 ## 🎯 Adding New Features
@@ -203,28 +191,28 @@ npx nx affected -t test                        # Test only affected projects
 ### Generate a new React application:
 
 ```bash
-npx nx g @nx/react:app my-app
+npm exec nx g @nx/react:app my-app
 ```
 
 ### Generate a new React library:
 
 ```bash
-npx nx g @nx/react:lib my-lib
+npm exec nx g @nx/react:lib my-lib
 ```
 
 ### Generate a new React component:
 
 ```bash
-npx nx g @nx/react:component my-component --project=my-lib
+npm exec nx g @nx/react:component my-component --project=my-lib
 ```
 
 ### Generate a new API library:
 
 ```bash
-npx nx g @nx/node:lib my-api-lib
+npm exec nx g @nx/node:lib my-api-lib
 ```
 
-You can use `npx nx list` to see all available plugins and `npx nx list <plugin-name>` to see all generators for a specific plugin.
+You can use `npm exec nx list` to see all available plugins and `npm exec nx list <plugin-name>` to see all generators for a specific plugin.
 
 ## Nx Cloud
 
@@ -246,7 +234,6 @@ Nx Console is an editor extension that enriches your developer experience. It le
 - [Nx Documentation](https://nx.dev/docs)
 - [Crafting Your Workspace Tutorial](https://nx.dev/docs/getting-started/tutorials/crafting-your-workspace)
 - [Module Boundaries](https://nx.dev/docs/features/enforce-module-boundaries)
-- [Playwright Testing](https://nx.dev/docs/technologies/test-tools/playwright)
 - [Vite](https://nx.dev/docs/technologies/build-tools/vite)
 - [Docker Integration](https://nx.dev/docs/guides/nx-release/release-docker-images)
 - [Nx Cloud](https://nx.dev/nx-cloud)
