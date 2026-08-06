@@ -184,7 +184,7 @@ const mockupMarkup = `<div class="caliper" aria-hidden="true">
 <footer>
   <div class="wrap">
     <div class="brand"><span class="name">Dr. Ana Gavrilita</span></div>
-    <div class="fmeta mono">© 2026 · Cluj-Napoca, România · Acest site nu înlocuiește un consult medical direct</div>
+    <div class="fmeta mono">© 2026 · Galati, România · Acest site nu înlocuiește un consult medical direct</div>
   </div>
 </footer>`;
 
