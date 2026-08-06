@@ -61,7 +61,7 @@ npm exec nx run-many -t lint test build --parallel=3
 npm exec nx graph
 ```
 
-> This workspace requires Node.js `^20.19.0 || >=22.12.0`.
+> This workspace requires Node.js `>=24.0.0`.
 
 ## 🌐 Deployment (cPanel)
 
