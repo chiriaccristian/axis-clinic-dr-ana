@@ -93,7 +93,7 @@ const mockupMarkup = `<div class="caliper" aria-hidden="true">
   <div class="services-grid">
     <div class="service-card"><div class="idx mono">01</div><h3>Rinoplastie</h3><p>Corecție structurală și estetică a nasului, cu simulare 3D a rezultatului preconizat.</p></div>
     <div class="service-card"><div class="idx mono">02</div><h3>Blefaroplastie</h3><p>Rejuvenare a zonei periorbitale, păstrând expresivitatea naturală a privirii.</p></div>
-    <div class="service-card"><div class="idx mono">03</div><h3>Lifting facial</h3><p>Tehnică cu incizii minime, orientată spre un aspect odihnit, nu „tras".</p></div>
+    <div class="service-card"><div class="idx mono">03</div><h3>Lifting facial</h3><p>Tehnică cu incizii minime, orientată spre un aspect odihnit.</p></div>
     <div class="service-card"><div class="idx mono">04</div><h3>Augmentare mamară</h3><p>Alegerea implantului pornește de la structura toracică, nu de la o mărime fixă.</p></div>
     <div class="service-card"><div class="idx mono">05</div><h3>Abdominoplastie</h3><p>Remodelare a peretelui abdominal, frecvent asociată cu recuperare post-sarcină.</p></div>
     <div class="service-card"><div class="idx mono">06</div><h3>Liposculptură</h3><p>Redefinire a conturului corporal prin tehnică asistată, cu accent pe simetrie.</p></div>
