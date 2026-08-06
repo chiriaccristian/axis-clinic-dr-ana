@@ -63,6 +63,34 @@ npm exec nx graph
 
 > This workspace requires Node.js `^20.19.0 || >=22.12.0`.
 
+## 🌐 Deployment (cPanel)
+
+Acest repository este configurat pentru deployment automat pe cPanel folosind GitHub Actions.
+
+### Instrucțiuni de configurare:
+
+1.  **Creează credențiale FTP în cPanel**:
+    *   Autentifică-te în cPanel.
+    *   Mergi la **FTP Accounts**.
+    *   Creează un cont nou sau folosește unul existent.
+    *   Notează **FTP Server**, **Username** și **Password**.
+
+2.  **Adaugă "Secrets" în GitHub**:
+    *   Mergi la repository-ul tău pe GitHub.
+    *   Navighează la **Settings** > **Secrets and variables** > **Actions**.
+    *   Adaugă următoarele **Repository secrets**:
+        *   `FTP_SERVER`: Adresa serverului tău (ex: `ftp.domeniultau.ro`).
+        *   `FTP_USERNAME`: Utilizatorul FTP (ex: `user@domeniultau.ro`).
+        *   `FTP_PASSWORD`: Parola contului FTP.
+
+3.  **Deploy Automat**:
+    *   La fiecare `push` sau `merge` pe branch-ul `main`, workflow-ul `.github/workflows/deploy.yml` va:
+        1.  Instala dependențele.
+        2.  Compila aplicația `@org/clinic`.
+        3.  Încărca conținutul folderului `apps/clinic/dist` în folderul `public_html/` de pe serverul tău.
+
+> **Notă**: Fișierul `.htaccess` din `apps/clinic/public` este inclus automat în build pentru a gestiona rutarea React (Single Page Application) pe serverul Apache din cPanel.
+
 ## ⭐ Featured Nx Capabilities
 
 This repository showcases several powerful Nx features:
