@@ -68,6 +68,7 @@ const mockupMarkup = `<div class="caliper" aria-hidden="true">
       <div class="eyebrow">Parcurs profesional</div>
       <div class="creds">
         <div class="row"><span class="yr mono">2007</span><span class="txt">Licență Medicină Generală, UMF „Carol Davila", București</span></div>
+        <div class="row"><span class="yr mono">2007</span><span class="txt">Licență Medicină Generală, UMF „Carol Davila", București</span></div>
         <div class="row"><span class="yr mono">2013</span><span class="txt">Specializare Chirurgie Plastică, Estetică și Microchirurgie Reconstructivă</span></div>
         <div class="row"><span class="yr mono">2016</span><span class="txt">Fellowship în chirurgie facială estetică, Paris</span></div>
         <div class="row"><span class="yr mono">2019</span><span class="txt">Membru titular al Societății Române de Chirurgie Plastică</span></div>
