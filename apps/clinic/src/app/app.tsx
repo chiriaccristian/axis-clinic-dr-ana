@@ -11,7 +11,7 @@ const mockupMarkup = `<div class="caliper" aria-hidden="true">
 <header>
   <div class="wrap">
     <div class="brand">
-      <span class="name">Dr. Ana Gavrilita</span>
+      <span class="name">Dr. Ana Gavrilita Cristian</span>
       <span class="tag">Chirurgie Plastică &amp; Estetică</span>
     </div>
     <nav class="links">
@@ -183,7 +183,7 @@ const mockupMarkup = `<div class="caliper" aria-hidden="true">
 
 <footer>
   <div class="wrap">
-    <div class="brand"><span class="name">Dr. Ana Gavrilita</span></div>
+    <div class="brand"><span class="name">Dr. Ana Gavrilita Cristian</span></div>
     <div class="fmeta mono">© 2026 · Galati, România · Acest site nu înlocuiește un consult medical direct</div>
   </div>
 </footer>`;
