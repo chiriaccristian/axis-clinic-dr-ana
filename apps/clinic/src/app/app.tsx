@@ -1,4 +1,6 @@
-const mockupMarkup = `<div class="caliper" aria-hidden="true">
+import { ClinicDesign } from './clinic-design';
+
+export const mockupMarkup = `<div class="caliper" aria-hidden="true">
   <div class="stem"></div>
   <div class="tick active" data-sec="hero"><span class="dash"></span><span class="lbl mono">00 START</span></div>
   <div class="tick" data-sec="about"><span class="dash"></span><span class="lbl mono">01 MEDIC</span></div>
@@ -189,7 +191,7 @@ const mockupMarkup = `<div class="caliper" aria-hidden="true">
 </footer>`;
 
 export function App() {
-  return <div dangerouslySetInnerHTML={{ __html: mockupMarkup }} />;
+  return <ClinicDesign />;
 }
 
 export default App;
