@@ -7,4 +7,5 @@
 
 /* Modern OMF palette: calm, clinical and personal */
 :root{--ink:#18353e;--wine:#245465;--rose:#b8dfe0;--blush:#e6f1f0;--ivory:#f8fbfa;--muted:#6d7f82;--line:#d6e3e2;--white:#fff}
+.brand-logo{width:42px;height:42px;display:block;flex:0 0 auto}
 .topbar{background:var(--wine)}.header{background:var(--ivory)}.brand-icon{border-color:var(--wine);color:var(--wine)}.brand-name strong,.nav-cta,.primary,.footer a{color:var(--wine)}.nav-cta,.primary{background:var(--wine);color:#fff}.hero h1,.intro h2,.services h2,.philosophy h2,.contact h2{color:var(--wine)}.hero h1 em,.intro h2 em,.services h2 em,.philosophy h2 em,.contact h2 em{color:#6b9696}.intro{background:var(--blush)}.philosophy{background:var(--wine)}.photo-label{background:var(--rose);color:var(--wine)}.service:nth-child(2){background:var(--wine);border-color:var(--wine)}.contact{background:var(--ivory)}
