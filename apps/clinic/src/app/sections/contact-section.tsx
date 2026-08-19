@@ -42,7 +42,7 @@ export function ContactSection({ onRequestAppointment }: ContactSectionProps) {
           </DetailItem>
           <DetailItem label="Specializare">
             <p>
-              Chirurgie facială
+              Chirurgie oral si maxilo-facială,
               <br />
               Intervenții dedicate feței
             </p>
