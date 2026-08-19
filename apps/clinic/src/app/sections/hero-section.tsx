@@ -19,9 +19,9 @@ export function HeroSection({ onRequestAppointment }: HeroSectionProps) {
         <div>
           <Eyebrow>Chirurgie facială · Galați</Eyebrow>
           <DisplayHeading>
-            Chipul tău
+            Facial Harmony Clinic by Dr. Ana
             <br />
-            <em>cu grijă.</em>
+            <em>Galați</em>
           </DisplayHeading>
           <p className="max-w-[400px] text-[15px] leading-[1.8] text-[#70656a]">
             Sunt Dr. Ana, medic specialist în chirurgie orală și maxilo-facială,
