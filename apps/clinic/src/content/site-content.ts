@@ -15,7 +15,7 @@ export const brand = {
   logoSrc: '/logo.svg',
   topbarLeft: 'Facial Harmony Clinic by Dr. Ana · Galați',
   phone: '+40 756 599 985',
-  email: 'axisclinic@drana.ro',
+  email: 'facial.harmony@drana.ro',
 };
 
 export const navLinks = [
@@ -63,7 +63,7 @@ export const appointmentOptions = [
 ];
 
 export const footer = {
-  copyright: '© 2026 Facial Harmony Clinic Dr. Ana',
+  copyright: '© 2026 Facial Harmony Clinic by Dr. Ana',
   tagline: 'Chirurgie estetică cu intenție și echilibru.',
   backToTopLabel: 'Înapoi sus',
 };
