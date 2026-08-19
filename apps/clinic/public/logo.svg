@@ -1,14 +1,34 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-labelledby="title desc">
-  <title id="title">Facial Harmony Clinic Dr. Ana</title>
-  <desc id="desc">Monogramă A modernă pe fundal în degrade, cu accent de picătură</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-labelledby="title desc">
+  <title id="title">Facial Harmony Clinic - Dr. Ana</title>
+  <desc id="desc">Logo reprezentând armonia, naturalețea și precizia prin simetrie și forme fluide.</desc>
   <defs>
-    <linearGradient id="fhTile" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#1d4b5c"/>
-      <stop offset="1" stop-color="#7aa3a3"/>
+    <linearGradient id="primary" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1d4b5c"/>
+      <stop offset="100%" stop-color="#3a7587"/>
+    </linearGradient>
+    <linearGradient id="secondary" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7aa3a3"/>
+      <stop offset="100%" stop-color="#b8dfe0"/>
     </linearGradient>
   </defs>
-  <rect width="96" height="96" rx="26" fill="url(#fhTile)"/>
-  <path d="M29 69 48 28l19 41" fill="none" stroke="#f8fbfa" stroke-linecap="round" stroke-linejoin="round" stroke-width="5.5"/>
-  <path d="M39 57h18" fill="none" stroke="#b8dfe0" stroke-linecap="round" stroke-width="4.5"/>
-  <circle cx="48" cy="18" r="3.5" fill="#b8dfe0"/>
+
+  <!-- Cercuri de ghidaj (Echilibru / Armonie) -->
+  <circle cx="60" cy="60" r="54" fill="none" stroke="#b8dfe0" stroke-width="0.5" stroke-dasharray="4 4"/>
+  <circle cx="60" cy="60" r="48" fill="none" stroke="#e0ecec" stroke-width="1"/>
+
+  <!-- Petala centrală (Echilibru / Naturalețe) -->
+  <path d="M 60 15 C 80 40, 80 80, 60 105 C 40 80, 40 40, 60 15 Z" fill="none" stroke="url(#primary)" stroke-width="2.5" stroke-linejoin="round"/>
+  
+  <!-- Petala stângă (Ascultare) -->
+  <path d="M 60 105 C 30 95, 15 60, 30 40 C 45 50, 50 75, 60 105 Z" fill="none" stroke="url(#secondary)" stroke-width="2" stroke-linejoin="round"/>
+
+  <!-- Petala dreaptă (Încredere) -->
+  <path d="M 60 105 C 90 95, 105 60, 90 40 C 75 50, 70 75, 60 105 Z" fill="none" stroke="url(#secondary)" stroke-width="2" stroke-linejoin="round"/>
+
+  <!-- Elementul central de Precizie (Stea / Diamant) -->
+  <path d="M 60 45 Q 63 55 70 58 Q 63 61 60 71 Q 57 61 50 58 Q 57 55 60 45 Z" fill="url(#primary)"/>
+  
+  <!-- Puncte de accent -->
+  <circle cx="60" cy="30" r="2.5" fill="#7aa3a3"/>
+  <circle cx="60" cy="86" r="2.5" fill="#7aa3a3"/>
 </svg>
