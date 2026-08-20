@@ -23,6 +23,7 @@ export const brand = {
   topbarLeft: 'Facial Harmony Clinic by Dr. Ana · Galați',
   phone: '+40 756 599 985',
   email: 'facial.harmony@drana.ro',
+  instagram: 'https://www.instagram.com/facial_harmony_by_dr_ana?igsh=MWwxNmFqbzF6ZnFqcw%3D%3D&utm_source=qr',
 };
 
 export const navLinks = [

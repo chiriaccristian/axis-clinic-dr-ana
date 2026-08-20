@@ -45,33 +45,34 @@ export function SiteHeader({
       >
         {skipLinkLabel}
       </a>
-      <Container className="flex h-full items-center justify-between">
-        <a href={homeHref} className="flex items-center gap-3">
+      <Container className="flex h-full min-w-0 items-center justify-between gap-2">
+        <a href={homeHref} className="flex min-w-0 items-center gap-2 md:gap-3">
           <img
             src={logoSrc}
             alt={name}
-            className="block h-[42px] w-[42px] shrink-0"
+            className="block h-[36px] w-[36px] shrink-0 md:h-[42px] md:w-[42px]"
           />
-          <span>
-            <strong className="block text-[15px] tracking-[0.18em] text-wine uppercase">
+          <span className="min-w-0">
+            <strong className="block truncate text-[11px] tracking-[0.12em] text-wine uppercase md:text-[15px] md:tracking-[0.18em]">
               {name}
             </strong>{' '}
-            <small className="mt-1 block text-[8px] tracking-[0.26em] text-muted uppercase">
+            <small className="mt-1 block truncate text-[7px] tracking-[0.18em] text-muted uppercase md:text-[8px] md:tracking-[0.26em]">
               {subtitle}
             </small>
           </span>
         </a>
 
-        <Button
-          variant="icon"
-          aria-label={menuLabel}
-          aria-expanded={menuOpen}
-          aria-controls="site-nav"
-          className="block md:hidden"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          <span aria-hidden="true">{menuOpen ? '×' : '☰'}</span>
-        </Button>
+        <div className="flex shrink-0 items-center gap-2 md:hidden">
+          <Button
+            variant="icon"
+            aria-label={menuLabel}
+            aria-expanded={menuOpen}
+            aria-controls="site-nav"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <span aria-hidden="true">{menuOpen ? '×' : '☰'}</span>
+          </Button>
+        </div>
 
         <nav
           id="site-nav"
