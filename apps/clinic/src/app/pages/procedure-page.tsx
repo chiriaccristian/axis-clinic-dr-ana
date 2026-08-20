@@ -35,10 +35,16 @@ export function ProcedurePage() {
   return (
     <div className="overflow-hidden">
       <TopBar
-        left={brand.topbarLeft}
+        left={
+          <>
+            <span className="block md:inline">Facial Harmony Clinic</span>{' '}
+            <span className="block md:inline">by Dr. Ana · Galați</span>
+          </>
+        }
         right={
           <>
-            Programări: <b>{brand.phone}</b>
+            <span className="block md:inline">Programări:</span>{' '}
+            <b className="block md:inline">{brand.phone}</b>
           </>
         }
       />
@@ -122,6 +128,7 @@ export function ProcedurePage() {
               copyright={footer.copyright}
               tagline={footer.tagline}
               backToTopLabel={footer.backToTopLabel}
+              instagramHref={brand.instagram}
             />
           </Container>
         </Section>

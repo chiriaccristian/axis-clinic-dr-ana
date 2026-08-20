@@ -60,6 +60,27 @@ export function AppointmentModal({ onClose }: AppointmentModalProps) {
             Completează formularul, iar echipa mea îți va răspunde în maximum 24
             de ore.
           </ModalText>
+          <a
+            href={brand.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Vezi rezultate și informații pe Instagram"
+            className="mt-4 mb-8 inline-flex items-center gap-2 text-[14px] font-medium text-wine transition-colors hover:text-[#70656a] hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wine"
+          >
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              className="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+            </svg>
+            <span>Vezi rezultate și informații pe Instagram →</span>
+          </a>
           <Form onSubmit={handleSubmit}>
             <TextField
               label="Nume complet"

@@ -54,6 +54,7 @@ export function ContactSection({ onRequestAppointment }: ContactSectionProps) {
           copyright={footer.copyright}
           tagline={footer.tagline}
           backToTopLabel={footer.backToTopLabel}
+          instagramHref={brand.instagram}
         />
       </Container>
     </Section>
