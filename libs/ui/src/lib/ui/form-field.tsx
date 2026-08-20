@@ -3,6 +3,7 @@ import {
   InputHTMLAttributes,
   ReactNode,
   SelectHTMLAttributes,
+  useId,
 } from 'react';
 
 const labelClass = 'text-[9px] tracking-[0.14em] text-[#8d7076] uppercase';
@@ -13,12 +14,17 @@ export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
 }
 
-export function TextField({ label, ...rest }: TextFieldProps) {
+export function TextField({ label, id, ...rest }: TextFieldProps) {
+  const generatedId = useId();
+  const fieldId = id ?? generatedId;
+
   return (
-    <label className={labelClass}>
-      {label}
-      <input className={controlClass} {...rest} />
-    </label>
+    <div>
+      <label className={labelClass} htmlFor={fieldId}>
+        {label}
+      </label>
+      <input id={fieldId} className={controlClass} {...rest} />
+    </div>
   );
 }
 
@@ -27,14 +33,24 @@ export interface SelectFieldProps extends SelectHTMLAttributes<HTMLSelectElement
   children: ReactNode;
 }
 
-export function SelectField({ label, children, ...rest }: SelectFieldProps) {
+export function SelectField({
+  label,
+  children,
+  id,
+  ...rest
+}: SelectFieldProps) {
+  const generatedId = useId();
+  const fieldId = id ?? generatedId;
+
   return (
-    <label className={labelClass}>
-      {label}
-      <select className={controlClass} {...rest}>
+    <div>
+      <label className={labelClass} htmlFor={fieldId}>
+        {label}
+      </label>
+      <select id={fieldId} className={controlClass} {...rest}>
         {children}
       </select>
-    </label>
+    </div>
   );
 }
 

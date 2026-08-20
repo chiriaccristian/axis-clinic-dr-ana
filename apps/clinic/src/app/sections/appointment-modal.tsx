@@ -10,7 +10,7 @@ import {
   SuccessMessage,
   TextField,
 } from '@org/ui';
-import { appointmentOptions } from '../../content/site-content';
+import { appointmentOptions, brand } from '../../content/site-content';
 
 export interface AppointmentModalProps {
   onClose: () => void;
@@ -21,15 +21,32 @@ export function AppointmentModal({ onClose }: AppointmentModalProps) {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    const data = new FormData(event.currentTarget);
+    const name = String(data.get('name') ?? '');
+    const email = String(data.get('email') ?? '');
+    const phone = String(data.get('phone') ?? '');
+    const procedure = String(data.get('procedure') ?? '');
+    const subject = `Solicitare programare — ${name}`;
+    const body = [
+      `Nume: ${name}`,
+      `Email: ${email}`,
+      `Telefon: ${phone}`,
+      `Procedură: ${procedure}`,
+    ].join('\n');
+
+    window.location.href = `mailto:${brand.email}?subject=${encodeURIComponent(
+      subject,
+    )}&body=${encodeURIComponent(body)}`;
     setSent(true);
   };
 
   return (
-    <Modal onClose={onClose}>
+    <Modal onClose={onClose} label="Solicitare de programare">
       {sent ? (
         <SuccessMessage
           title="Mulțumesc."
-          description="Am primit solicitarea ta. Te vom contacta în cel mai scurt timp."
+          description={`S-a deschis clientul tău de email cu solicitarea completată. Dacă nu se deschide, scrie-mi direct la ${brand.email}.`}
         />
       ) : (
         <>
@@ -44,14 +61,31 @@ export function AppointmentModal({ onClose }: AppointmentModalProps) {
             de ore.
           </ModalText>
           <Form onSubmit={handleSubmit}>
-            <TextField label="Nume complet" required placeholder="Numele tău" />
+            <TextField
+              label="Nume complet"
+              name="name"
+              required
+              placeholder="Numele tău"
+            />
             <TextField
               label="Adresă de email"
+              name="email"
               required
               type="email"
               placeholder="email@exemplu.ro"
             />
-            <SelectField label="Cu ce te pot ajuta?" required defaultValue="">
+            <TextField
+              label="Telefon"
+              name="phone"
+              type="tel"
+              placeholder="07xx xxx xxx"
+            />
+            <SelectField
+              label="Cu ce te pot ajuta?"
+              name="procedure"
+              required
+              defaultValue=""
+            >
               <option value="">Alege o procedură</option>
               {appointmentOptions.map((option) => (
                 <option key={option}>{option}</option>

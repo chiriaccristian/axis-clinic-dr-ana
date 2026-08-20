@@ -25,8 +25,8 @@ export function ServicesSection({ procedures }: ServicesSectionProps) {
             </SectionHeading>
           </div>
           <p className="mt-[25px] max-w-[280px] text-[13px] leading-[1.7] text-muted md:mt-0">
-            Fiecare plan este personalizat în urma unei consultații gratuite, fără
-            presiune și fără promisiuni nerealiste.
+            Fiecare plan este personalizat în urma unei consultații gratuite,
+            fără presiune și fără promisiuni nerealiste.
           </p>
         </div>
         <div className="grid gap-[12px] md:grid-cols-4">
@@ -37,6 +37,7 @@ export function ServicesSection({ procedures }: ServicesSectionProps) {
               title={procedure.title}
               description={procedure.description}
               action="Detalii procedură"
+              href={`/proceduri/${procedure.slug}`}
               featured={index === 1}
             />
           ))}
