@@ -17,7 +17,10 @@ export interface SiteHeaderProps {
   onCtaClick: () => void;
   /** Anchor the brand links back to. */
   homeHref?: string;
+  /** Prefix applied before the navigation anchors, used on sub-pages. */
+  linkHrefBase?: string;
   menuLabel?: string;
+  skipLinkLabel?: string;
 }
 
 export function SiteHeader({
@@ -28,12 +31,20 @@ export function SiteHeader({
   ctaLabel,
   onCtaClick,
   homeHref = '#top',
+  linkHrefBase = '',
   menuLabel = 'Meniu',
+  skipLinkLabel = 'Sari la conținut',
 }: SiteHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <header className="h-[75px] border-b border-line bg-ivory md:h-[92px]">
+      <a
+        href={homeHref}
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-20 focus:bg-ivory focus:p-2 focus:text-wine"
+      >
+        {skipLinkLabel}
+      </a>
       <Container className="flex h-full items-center justify-between">
         <a href={homeHref} className="flex items-center gap-3">
           <img
@@ -42,10 +53,10 @@ export function SiteHeader({
             className="block h-[42px] w-[42px] shrink-0"
           />
           <span>
-            <strong className="block text-[15px] tracking-[0.18em] text-wine">
+            <strong className="block text-[15px] tracking-[0.18em] text-wine uppercase">
               {name}
-            </strong>
-            <small className="mt-1 block text-[8px] tracking-[0.26em] text-muted">
+            </strong>{' '}
+            <small className="mt-1 block text-[8px] tracking-[0.26em] text-muted uppercase">
               {subtitle}
             </small>
           </span>
@@ -55,13 +66,16 @@ export function SiteHeader({
           variant="icon"
           aria-label={menuLabel}
           aria-expanded={menuOpen}
+          aria-controls="site-nav"
           className="block md:hidden"
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          {menuOpen ? '×' : '☰'}
+          <span aria-hidden="true">{menuOpen ? '×' : '☰'}</span>
         </Button>
 
-        <div
+        <nav
+          id="site-nav"
+          aria-label={menuLabel}
           className={cn(
             'absolute inset-x-0 top-[109px] z-[5] flex-col items-start gap-8 border-b border-line bg-ivory px-5 py-[23px] text-[12px] text-[#75686d]',
             'md:static md:z-auto md:flex md:flex-row md:items-center md:border-0 md:bg-transparent md:p-0',
@@ -71,7 +85,7 @@ export function SiteHeader({
           {links.map(({ id, label }) => (
             <a
               key={id}
-              href={`#${id}`}
+              href={`${linkHrefBase}#${id}`}
               onClick={() => setMenuOpen(false)}
               className="hover:text-wine"
             >
@@ -81,7 +95,7 @@ export function SiteHeader({
           <Button variant="nav" onClick={onCtaClick}>
             {ctaLabel}
           </Button>
-        </div>
+        </nav>
       </Container>
     </header>
   );

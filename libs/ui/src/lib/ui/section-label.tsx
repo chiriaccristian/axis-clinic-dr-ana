@@ -5,12 +5,15 @@ export interface SectionLabelProps {
   children?: ReactNode;
   className?: string;
   tone?: 'default' | 'rose';
+  /** Ordinal marker rendered before the label text. */
+  index?: string;
 }
 
 export function SectionLabel({
   children,
   className,
   tone = 'default',
+  index,
 }: SectionLabelProps) {
   return (
     <div
@@ -20,6 +23,7 @@ export function SectionLabel({
         className,
       )}
     >
+      {index && <span className="mr-[10px]">{index}</span>}
       {children}
     </div>
   );

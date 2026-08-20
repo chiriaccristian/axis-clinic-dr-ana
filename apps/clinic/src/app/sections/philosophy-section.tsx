@@ -15,7 +15,18 @@ export function PhilosophySection({ values }: PhilosophySectionProps) {
   return (
     <Section id="filozofie" tone="wine" className="py-20 md:py-[110px]">
       <Container className="grid items-center gap-[38px] md:grid-cols-2 md:gap-[95px]">
-        <div className="h-[420px] bg-[url('/philosophy-photo.png')] bg-center bg-cover saturate-50 md:h-[550px]" />
+        <picture>
+          <source srcSet="/philosophy-photo.webp" type="image/webp" />
+          <img
+            src="/philosophy-photo.jpg"
+            alt="Dr. Ana în timpul unei consultații de armonizare facială, la Facial Harmony Clinic din Galați"
+            width={720}
+            height={900}
+            loading="lazy"
+            decoding="async"
+            className="h-[420px] w-full object-cover object-center saturate-50 md:h-[550px]"
+          />
+        </picture>
         <div>
           <SectionLabel tone="rose">
             Abordarea mea

@@ -3,7 +3,21 @@
   <url>
     <loc>https://drana.ro/</loc>
     <lastmod>2026-08-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://drana.ro/proceduri/biorevitalizare</loc>
+    <lastmod>2026-08-19</lastmod>
+  </url>
+  <url>
+    <loc>https://drana.ro/proceduri/augmentarea-buzelor</loc>
+    <lastmod>2026-08-19</lastmod>
+  </url>
+  <url>
+    <loc>https://drana.ro/proceduri/toxina-botulinica</loc>
+    <lastmod>2026-08-19</lastmod>
+  </url>
+  <url>
+    <loc>https://drana.ro/proceduri/mezoterapie</loc>
+    <lastmod>2026-08-19</lastmod>
   </url>
 </urlset>

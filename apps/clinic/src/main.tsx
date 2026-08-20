@@ -3,12 +3,20 @@ import * as ReactDOM from 'react-dom/client';
 import App from './app/app';
 import './styles.css';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement,
-);
+const container = document.getElementById('root');
 
-root.render(
+if (!container) {
+  throw new Error('Elementul #root lipsește din document.');
+}
+
+const app = (
   <StrictMode>
     <App />
-  </StrictMode>,
+  </StrictMode>
 );
+
+if (container.hasChildNodes()) {
+  ReactDOM.hydrateRoot(container, app);
+} else {
+  ReactDOM.createRoot(container).render(app);
+}

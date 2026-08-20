@@ -7,6 +7,7 @@ import {
   Section,
   TextLink,
 } from '@org/ui';
+import { brand } from '../../content/site-content';
 
 export interface HeroSectionProps {
   onRequestAppointment: () => void;
@@ -22,6 +23,10 @@ export function HeroSection({ onRequestAppointment }: HeroSectionProps) {
             Chipul tău
             <br />
             <em>cu grijă.</em>
+            <span className="sr-only">
+              {' '}
+              — {brand.fullName}, armonizare facială în {brand.city}
+            </span>
           </DisplayHeading>
           <p className="max-w-[400px] text-[15px] leading-[1.8] text-[#70656a]">
             Sunt Dr. Ana, medic specialist în chirurgie orală și maxilo-facială,
@@ -46,7 +51,21 @@ export function HeroSection({ onRequestAppointment }: HeroSectionProps) {
         </div>
 
         <div className="relative h-[480px] pr-7 md:h-[600px]">
-          <div className="h-full bg-[linear-gradient(180deg,rgba(86,54,65,0.02),rgba(86,54,65,0.1)),url('/hero-photo.jpg')] bg-[position:center_28%] bg-cover saturate-[0.65] after:pointer-events-none after:absolute after:inset-y-[22px] after:right-0 after:left-[22px] after:border after:border-white/60 after:content-['']" />
+          <div className="relative h-full after:pointer-events-none after:absolute after:inset-y-[22px] after:right-0 after:left-[22px] after:border after:border-white/60 after:content-['']">
+            <picture>
+              <source srcSet="/hero-photo.webp" type="image/webp" />
+              <img
+                src="/hero-photo.jpg"
+                alt={`Dr. Ana, medic specialist în chirurgie orală și maxilo-facială, în cabinetul ${brand.fullName} din ${brand.city}`}
+                width={768}
+                height={1024}
+                fetchPriority="high"
+                decoding="async"
+                className="h-full w-full object-cover object-[center_28%] saturate-[0.65]"
+              />
+            </picture>
+            <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(86,54,65,0.02),rgba(86,54,65,0.1))]" />
+          </div>
           <PhotoLabel overline="Dr. ANA point of view">
             Rezultate care
             <br />
