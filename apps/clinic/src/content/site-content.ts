@@ -126,8 +126,17 @@ export const appointmentOptions = [
   'Mezoterapie',
 ];
 
+export const company = {
+  legalName: 'AXIS CLINIC BY DR ANA SRL',
+  vatId: 'CUI 55372109',
+  location: 'Galați, România',
+};
+
 export const footer = {
   copyright: '© 2026 Facial Harmony Clinic by Dr. Ana',
   tagline: 'Chirurgie estetică cu intenție și echilibru.',
   backToTopLabel: 'Înapoi sus',
+  legalName: company.legalName,
+  vatId: company.vatId,
+  location: company.location,
 };
