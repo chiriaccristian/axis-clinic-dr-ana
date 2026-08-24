@@ -47,7 +47,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="preload" as="image" href="/profil.jpg" type="image/jpg" fetchpriority="high" />
+    <link
+      rel="preload"
+      as="image"
+      type="image/avif"
+      href="/profil-768.avif"
+      imagesrcset="/profil-480.avif 480w, /profil-768.avif 768w, /profil-1024.avif 1024w"
+      imagesizes="(max-width: 767px) calc(100vw - 28px), 50vw"
+      fetchpriority="high"
+    />
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->

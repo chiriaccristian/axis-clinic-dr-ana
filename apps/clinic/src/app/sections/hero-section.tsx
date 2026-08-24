@@ -55,6 +55,16 @@ export function HeroSection({ onRequestAppointment }: HeroSectionProps) {
         <div className="relative h-[480px] pr-7 md:h-[600px]">
           <div className="relative h-full after:pointer-events-none after:absolute after:inset-y-[22px] after:right-0 after:left-[22px] after:border after:border-white/60 after:content-['']">
             <picture>
+              <source
+                type="image/avif"
+                srcSet="/profil-480.avif 480w, /profil-768.avif 768w, /profil-1024.avif 1024w"
+                sizes="(max-width: 767px) calc(100vw - 28px), 50vw"
+              />
+              <source
+                type="image/webp"
+                srcSet="/profil-480.webp 480w, /profil-768.webp 768w, /profil-1024.webp 1024w"
+                sizes="(max-width: 767px) calc(100vw - 28px), 50vw"
+              />
               <img
                 src="/profil.jpg"
                 alt={`Dr. Ana, medic specialist în chirurgie orală și maxilo-facială, în cabinetul ${brand.fullName} din ${brand.city}`}

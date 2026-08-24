@@ -16,8 +16,18 @@ export function PhilosophySection({ values }: PhilosophySectionProps) {
     <Section id="filozofie" tone="wine" className="py-20 md:py-27.5">
       <Container className="grid items-center gap-9.5 md:grid-cols-2 md:gap-23.75">
         <picture>
+          <source
+            type="image/avif"
+            srcSet="/my-description-480.avif 480w, /my-description-768.avif 768w, /my-description-1024.avif 1024w"
+            sizes="(max-width: 767px) calc(100vw - 40px), 50vw"
+          />
+          <source
+            type="image/webp"
+            srcSet="/my-description-480.webp 480w, /my-description-768.webp 768w, /my-description-1024.webp 1024w"
+            sizes="(max-width: 767px) calc(100vw - 40px), 50vw"
+          />
           <img
-            src="/description.jpg"
+            src="/my-description.jpg"
             alt="Dr. Ana în timpul unei consultații de armonizare facială, la Facial Harmony Clinic din Galați"
             width={720}
             height={900}

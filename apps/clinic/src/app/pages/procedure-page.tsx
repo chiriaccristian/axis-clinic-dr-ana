@@ -74,11 +74,11 @@ export function ProcedurePage() {
             <p className="m-0 max-w-[680px] font-serif text-[19px] leading-[1.55] text-[#58494f] md:text-[22px]">
               {procedure.intro}
             </p>
-            <div className="mt-[25px] block md:mt-[35px] md:flex md:items-center md:gap-[25px]">
+            <div className="mt-6.25 flex flex-col items-start gap-5 md:mt-8.75 md:flex-row md:items-center md:gap-6.25">
               <Button onClick={openWhatsApp}>Solicită o consultație</Button>
               <TextLink
                 href="/#servicii"
-                className="mt-5 block md:mt-0 md:inline"
+                className="inline-block"
               >
                 Înapoi la toate procedurile
               </TextLink>
