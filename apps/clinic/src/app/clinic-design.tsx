@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { SiteHeader, TopBar } from '@org/ui';
 import {
   brand,
@@ -13,6 +14,19 @@ import { PhilosophySection } from './sections/philosophy-section';
 import { ServicesSection } from './sections/services-section';
 
 export function ClinicDesign() {
+  useEffect(() => {
+    if (window.location.hash !== '#servicii') {
+      return;
+    }
+
+    const focusServices = () => {
+      const services = document.getElementById('servicii');
+      services?.focus({ preventScroll: true });
+    };
+
+    requestAnimationFrame(focusServices);
+  }, []);
+
   const openWhatsApp = () => {
     window.location.href = whatsappHref(
       'Bună ziua! Aș dori să programez o consultație.',

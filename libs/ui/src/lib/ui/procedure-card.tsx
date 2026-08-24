@@ -1,22 +1,19 @@
 import { cn } from '../utils/cn';
 
 export interface ProcedureCardProps {
-  number?: string;
   title: string;
   description: string;
-  /** Call to action rendered at the bottom of the card. */
+  price?: string;
   action: string;
-  /** When present the call to action becomes a link to the procedure page. */
   href?: string;
-  /** Highlighted cards are filled with the wine colour. */
   featured?: boolean;
   className?: string;
 }
 
 export function ProcedureCard({
-  number,
   title,
   description,
+  price,
   action,
   href,
   featured = false,
@@ -35,16 +32,6 @@ export function ProcedureCard({
         className,
       )}
     >
-      {number && (
-        <div
-          className={cn(
-            'text-[10px] tracking-[0.15em]',
-            featured ? 'text-[#e6cfd0]' : 'text-[#9b7c82]',
-          )}
-        >
-          {number}
-        </div>
-      )}
       <div>
         <h3 className="mb-3 font-serif text-[33px] font-normal">{title}</h3>
         <p
@@ -55,6 +42,16 @@ export function ProcedureCard({
         >
           {description}
         </p>
+        {price && (
+          <p
+            className={cn(
+              'mt-4 mb-0 font-serif text-[15px]',
+              featured ? 'text-white' : 'text-wine',
+            )}
+          >
+            {price}
+          </p>
+        )}
       </div>
       {href ? (
         <a
