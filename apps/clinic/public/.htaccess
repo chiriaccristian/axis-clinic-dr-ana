@@ -4,6 +4,7 @@
   RewriteCond %{HTTPS} !=on [OR]
   RewriteCond %{HTTP_HOST} !^drana\.ro$ [NC]
   RewriteRule ^ https://drana.ro%{REQUEST_URI} [R=301,L,NE]
+  RewriteRule ^$ /index.html [L]
   RewriteRule ^index\.html$ - [L]
   RewriteRule ^404\.html$ - [L]
   RewriteRule ^(proceduri/(biorevitalizare|augmentarea-buzelor|toxina-botulinica|mezoterapie)|politica-de-confidentialitate|termeni-si-conditii)/?$ /index.html [L]
