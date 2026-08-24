@@ -43,3 +43,45 @@ const entries = pngs.map((png, index) => {
 await writeFile(icoPath, Buffer.concat([header, ...entries, ...pngs]));
 
 console.log(`favicon.ico generat cu dimensiunile: ${sizes.join(', ')}`);
+
+const brandBackground = { r: 247, g: 243, b: 240, alpha: 1 };
+const appleTouchPath = new URL(
+  '../apps/clinic/public/apple-touch-icon.png',
+  import.meta.url,
+);
+const ogImagePath = new URL(
+  '../apps/clinic/public/og-image.jpg',
+  import.meta.url,
+);
+
+const appleTouchIcon = await sharp(svg, { density: 384 })
+  .resize(160, 160, { fit: 'contain', background: { ...brandBackground, alpha: 0 } })
+  .extend({ top: 10, bottom: 10, left: 10, right: 10, background: brandBackground })
+  .flatten({ background: brandBackground })
+  .png({ compressionLevel: 9 })
+  .toBuffer();
+
+await writeFile(appleTouchPath, appleTouchIcon);
+
+console.log('apple-touch-icon.png generat (180x180, fundal opac)');
+
+const ogLogo = await sharp(svg, { density: 384 })
+  .resize(420, 420, { fit: 'contain', background: { ...brandBackground, alpha: 0 } })
+  .png()
+  .toBuffer();
+
+const ogImage = await sharp({
+  create: {
+    width: 1200,
+    height: 630,
+    channels: 3,
+    background: brandBackground,
+  },
+})
+  .composite([{ input: ogLogo, gravity: 'centre' }])
+  .jpeg({ quality: 88, chromaSubsampling: '4:4:4' })
+  .toBuffer();
+
+await writeFile(ogImagePath, ogImage);
+
+console.log('og-image.jpg generat (1200x630)');
