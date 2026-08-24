@@ -65,31 +65,46 @@ npm exec nx graph
 
 ## 🌐 Deployment (cPanel)
 
-Acest repository este configurat pentru deployment automat pe cPanel folosind GitHub Actions.
+This repository is configured for automatic deployment to cPanel using GitHub Actions.
 
-### Instrucțiuni de configurare:
+### Setup instructions:
 
-1.  **Creează credențiale FTP în cPanel**:
-    *   Autentifică-te în cPanel.
-    *   Mergi la **FTP Accounts**.
-    *   Creează un cont nou sau folosește unul existent.
-    *   Notează **FTP Server**, **Username** și **Password**.
+1.  **Create FTP credentials in cPanel**:
+    *   Log in to cPanel.
+    *   Go to **FTP Accounts**.
+    *   Create a new account or use an existing one.
+    *   Note the **FTP Server**, **Username** and **Password**.
 
-2.  **Adaugă "Secrets" în GitHub**:
-    *   Mergi la repository-ul tău pe GitHub.
-    *   Navighează la **Settings** > **Secrets and variables** > **Actions**.
-    *   Adaugă următoarele **Repository secrets**:
-        *   `FTP_SERVER`: Adresa serverului tău (ex: `ftp.domeniultau.ro`).
-        *   `FTP_USERNAME`: Utilizatorul FTP (ex: `user@domeniultau.ro`).
-        *   `FTP_PASSWORD`: Parola contului FTP.
+2.  **Add "Secrets" in GitHub**:
+    *   Go to your repository on GitHub.
+    *   Navigate to **Settings** > **Secrets and variables** > **Actions**.
+    *   Add the following **Repository secrets**:
+        *   `FTP_SERVER`: Your server address (e.g. `ftp.yourdomain.com`).
+        *   `FTP_USERNAME`: The FTP user (e.g. `user@yourdomain.com`).
+        *   `FTP_PASSWORD`: The FTP account password.
 
-3.  **Deploy Automat**:
-    *   La fiecare `push` sau `merge` pe branch-ul `main`, workflow-ul `.github/workflows/deploy.yml` va:
-        1.  Instala dependențele.
-        2.  Compila aplicația `@org/clinic`.
-        3.  Încărca conținutul folderului `apps/clinic/dist` în folderul `public_html/` de pe serverul tău.
+3.  **Automatic deployment**:
+    *   On every `push` or `merge` to the `main` branch, the `.github/workflows/deploy.yml` workflow will:
+        1.  Install dependencies.
+        2.  Build the `@org/clinic` application.
+        3.  Upload the contents of the `apps/clinic/dist` folder to the `public_html/` folder on your server.
 
-> **Notă**: Fișierul `.htaccess` din `apps/clinic/public` este inclus automat în build pentru a gestiona rutarea React (Single Page Application) pe serverul Apache din cPanel.
+> **Note**: The `.htaccess` file in `apps/clinic/public` is automatically included in the build to handle React (Single Page Application) routing on the Apache server in cPanel.
+
+## 🎨 Visual identity (logo & favicon)
+
+The single source of truth for the visual identity is `apps/clinic/public/logo.svg`:
+
+- the logo displayed on the site (header) — `brand.logoSrc` in `apps/clinic/src/content/site-content.ts`;
+- favicon — `favicon.ico` (multi-resolution) + `logo.svg` for modern browsers;
+- `apple-touch-icon.png` (180×180, opaque background, PNG required for iOS);
+- `og-image.jpg` (1200×630) for Open Graph / Twitter and structured data.
+
+All derived images can be regenerated from the logo with:
+
+```bash
+node tools/generate-favicon.mjs
+```
 
 ## ⭐ Featured Nx Capabilities
 
