@@ -13,24 +13,21 @@ export interface PhilosophySectionProps {
 
 export function PhilosophySection({ values }: PhilosophySectionProps) {
   return (
-    <Section id="filozofie" tone="wine" className="py-20 md:py-[110px]">
-      <Container className="grid items-center gap-[38px] md:grid-cols-2 md:gap-[95px]">
+    <Section id="filozofie" tone="wine" className="py-20 md:py-27.5">
+      <Container className="grid items-center gap-9.5 md:grid-cols-2 md:gap-23.75">
         <picture>
-          <source srcSet="/philosophy-photo.webp" type="image/webp" />
           <img
-            src="/philosophy-photo.jpg"
+            src="/description.jpg"
             alt="Dr. Ana în timpul unei consultații de armonizare facială, la Facial Harmony Clinic din Galați"
             width={720}
             height={900}
             loading="lazy"
             decoding="async"
-            className="h-[420px] w-full object-cover object-center saturate-50 md:h-[550px]"
+            className="w-full h-full object-cover object-center"
           />
         </picture>
         <div>
-          <SectionLabel tone="rose">
-            Abordarea mea
-          </SectionLabel>
+          <SectionLabel tone="rose">Abordarea mea</SectionLabel>
           <SectionHeading tone="light" className="mt-5 mb-7">
             Clar, personal,
             <br />

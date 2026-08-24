@@ -60,7 +60,7 @@ export function HeroSection({ onRequestAppointment }: HeroSectionProps) {
                 height={1024}
                 fetchPriority="high"
                 decoding="async"
-                className="h-full w-full object-cover object-[center_28%] saturate-[0.65]"
+                className="h-full w-full object-cover object-[center_28%]"
               />
             </picture>
             <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(86,54,65,0.02),rgba(86,54,65,0.1))]" />
