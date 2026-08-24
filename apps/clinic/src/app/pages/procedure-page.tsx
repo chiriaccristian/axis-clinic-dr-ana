@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import {
   Button,
@@ -17,14 +16,18 @@ import {
   footer,
   navLinks,
   procedures,
+  whatsappHref,
 } from '../../content/site-content';
-import { AppointmentModal } from '../sections/appointment-modal';
 
 export function ProcedurePage() {
   const { slug } = useParams();
-  const [modalOpen, setModalOpen] = useState(false);
-  const openModal = () => setModalOpen(true);
-  const closeModal = () => setModalOpen(false);
+  const openWhatsApp = () => {
+    window.location.href = whatsappHref(
+      `Bună ziua! Aș dori să programez o consultație pentru ${
+        procedures.find((item) => item.slug === slug)?.title ?? 'o procedură'
+      }.`,
+    );
+  };
 
   const procedure = procedures.find((item) => item.slug === slug);
 
@@ -54,7 +57,7 @@ export function ProcedurePage() {
         subtitle={brand.subtitle}
         links={navLinks}
         ctaLabel="Contactează-mă"
-        onCtaClick={openModal}
+        onCtaClick={openWhatsApp}
         homeHref="/"
         linkHrefBase="/"
       />
@@ -72,7 +75,7 @@ export function ProcedurePage() {
               {procedure.intro}
             </p>
             <div className="mt-[35px] block md:flex md:items-center md:gap-[25px]">
-              <Button onClick={openModal}>Solicită o consultație</Button>
+              <Button onClick={openWhatsApp}>Solicită o consultație</Button>
               <TextLink
                 href="/#servicii"
                 className="mt-5 block md:mt-0 md:inline"
@@ -119,7 +122,7 @@ export function ProcedurePage() {
               {procedure.title.toLowerCase()} și discutăm despre ce ți se
               potrivește.
             </p>
-            <Button className="mt-[25px]" onClick={openModal}>
+            <Button className="mt-[25px]" onClick={openWhatsApp}>
               Trimite o solicitare
             </Button>
           </Container>
@@ -134,7 +137,6 @@ export function ProcedurePage() {
         </Section>
       </main>
 
-      {modalOpen && <AppointmentModal onClose={closeModal} />}
     </div>
   );
 }

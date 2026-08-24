@@ -22,9 +22,14 @@ export const brand = {
   logoSrc: '/logo2.svg',
   topbarLeft: 'Facial Harmony Clinic by Dr. Ana · Galați',
   phone: '+40 756 599 985',
+  whatsapp: '40756599985',
   email: 'facial.harmony@drana.ro',
   instagram: 'https://www.instagram.com/facial_harmony_by_dr_ana?igsh=MWwxNmFqbzF6ZnFqcw%3D%3D&utm_source=qr',
 };
+
+export function whatsappHref(message: string) {
+  return `https://wa.me/${brand.whatsapp}?text=${encodeURIComponent(message)}`;
+}
 
 export const navLinks = [
   { id: 'despre', label: 'Despre Dr. Ana' },

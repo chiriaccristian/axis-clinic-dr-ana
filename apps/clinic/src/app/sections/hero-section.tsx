@@ -53,9 +53,8 @@ export function HeroSection({ onRequestAppointment }: HeroSectionProps) {
         <div className="relative h-[480px] pr-7 md:h-[600px]">
           <div className="relative h-full after:pointer-events-none after:absolute after:inset-y-[22px] after:right-0 after:left-[22px] after:border after:border-white/60 after:content-['']">
             <picture>
-              <source srcSet="/hero-photo.webp" type="image/webp" />
               <img
-                src="/hero-photo.jpg"
+                src="/profile.jpg"
                 alt={`Dr. Ana, medic specialist în chirurgie orală și maxilo-facială, în cabinetul ${brand.fullName} din ${brand.city}`}
                 width={768}
                 height={1024}
