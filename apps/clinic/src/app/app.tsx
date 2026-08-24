@@ -3,6 +3,7 @@ import { ClinicDesign } from './clinic-design';
 import { LegalPage } from './pages/legal-page';
 import { ProcedurePage } from './pages/procedure-page';
 import { NotFoundPage } from './pages/not-found-page';
+import { CookieConsent } from './cookie-consent';
 
 export function AppRoutes() {
   return (
@@ -20,6 +21,7 @@ export function App() {
   return (
     <BrowserRouter>
       <AppRoutes />
+      <CookieConsent />
     </BrowserRouter>
   );
 }
