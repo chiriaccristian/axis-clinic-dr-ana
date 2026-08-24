@@ -63,7 +63,7 @@ export function ProcedurePage() {
       />
 
       <main id="top">
-        <Section tone="ivory" className="py-20 md:pt-[105px] md:pb-[95px]">
+        <Section tone="ivory" className="py-12 md:pt-[105px] md:pb-[95px]">
           <Container>
             <SectionLabel>Proceduri</SectionLabel>
             <DisplayHeading>
@@ -74,7 +74,7 @@ export function ProcedurePage() {
             <p className="m-0 max-w-[680px] font-serif text-[19px] leading-[1.55] text-[#58494f] md:text-[22px]">
               {procedure.intro}
             </p>
-            <div className="mt-[35px] block md:flex md:items-center md:gap-[25px]">
+            <div className="mt-[25px] block md:mt-[35px] md:flex md:items-center md:gap-[25px]">
               <Button onClick={openWhatsApp}>Solicită o consultație</Button>
               <TextLink
                 href="/#servicii"
@@ -86,7 +86,7 @@ export function ProcedurePage() {
           </Container>
         </Section>
 
-        <Section className="py-20 md:py-[110px]">
+        <Section className="py-12 md:py-[110px]">
           <Container className="grid gap-[28px] md:grid-cols-[0.65fr_1.35fr] md:gap-[90px]">
             <SectionLabel>Cum lucrăm</SectionLabel>
             <div>
@@ -95,7 +95,7 @@ export function ProcedurePage() {
                 <br />
                 <em>pas cu pas.</em>
               </SectionHeading>
-              <ul className="m-0 mt-[35px] list-none border-t border-line p-0">
+              <ul className="m-0 mt-[22px] list-none border-t border-line p-0 md:mt-[35px]">
                 {procedure.details.map((detail) => (
                   <li
                     key={detail}
@@ -109,10 +109,10 @@ export function ProcedurePage() {
           </Container>
         </Section>
 
-        <Section tone="ivory" className="py-20 md:pt-[95px] md:pb-0">
+        <Section tone="ivory" className="pt-12 pb-0 md:pt-[95px] md:pb-0">
           <Container>
             <SectionLabel>Contact</SectionLabel>
-            <SectionHeading className="my-[22px]">
+            <SectionHeading className="my-[18px] md:my-[22px]">
               Primul pas este
               <br />
               <em>o conversație.</em>
