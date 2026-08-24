@@ -17,7 +17,7 @@ export function PhilosophySection({ values }: PhilosophySectionProps) {
       <Container className="grid items-center gap-9.5 md:grid-cols-2 md:gap-23.75">
         <picture>
           <img
-            src="/description.jpg"
+            src="/my-description.jpg"
             alt="Dr. Ana în timpul unei consultații de armonizare facială, la Facial Harmony Clinic din Galați"
             width={720}
             height={900}
