@@ -132,6 +132,9 @@ export function ProcedurePage() {
               tagline={footer.tagline}
               backToTopLabel={footer.backToTopLabel}
               instagramHref={brand.instagram}
+              legalName={footer.legalName}
+              vatId={footer.vatId}
+              location={footer.location}
             />
           </Container>
         </Section>

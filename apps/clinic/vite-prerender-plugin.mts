@@ -115,6 +115,14 @@ function injectAppHtml(html: string, appHtml: string) {
   );
 }
 
+function buildLegalHead(html: string, title: string, url: string) {
+  return replaceTag(
+    replaceTag(html, /<title>[\s\S]*?<\/title>/, `<title>${title} | ${CLINIC_NAME}</title>`),
+    /<link rel="canonical" href="[^"]*" \/>/,
+    `<link rel="canonical" href="${SITE_URL}${url}" />`,
+  );
+}
+
 export function prerenderPlugin(): Plugin {
   return {
     name: 'clinic-prerender',
@@ -172,6 +180,22 @@ export function prerenderPlugin(): Plugin {
           );
           const file = join(distDir, 'proceduri', procedure.slug, 'index.html');
 
+          await mkdir(dirname(file), { recursive: true });
+          await writeFile(file, html);
+          pages += 1;
+        }
+
+        for (const legalPage of [
+          ['politica-de-confidentialitate', 'Politica de confidențialitate'],
+          ['termeni-si-conditii', 'Termeni și condiții'],
+        ] as const) {
+          const [slug, title] = legalPage;
+          const html = buildLegalHead(
+            injectAppHtml(template, entry.render(`/${slug}`)),
+            title,
+            `/${slug}`,
+          );
+          const file = join(distDir, slug, 'index.html');
           await mkdir(dirname(file), { recursive: true });
           await writeFile(file, html);
           pages += 1;

@@ -18,7 +18,9 @@ export function HeroSection({ onRequestAppointment }: HeroSectionProps) {
     <Section className="pt-[45px] pb-[75px] md:pt-[58px] md:pb-[110px]">
       <Container className="grid items-center gap-[45px] md:grid-cols-[1fr_1.08fr] md:gap-[75px]">
         <div>
-          <Eyebrow>Chirurgie facială · Galați</Eyebrow>
+          <Eyebrow>
+            Chirurgie orală și maxilo-facială · Galați
+          </Eyebrow>
           <DisplayHeading>
             Chipul tău
             <br />
