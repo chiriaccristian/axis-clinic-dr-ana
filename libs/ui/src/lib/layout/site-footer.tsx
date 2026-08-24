@@ -46,8 +46,17 @@ export function SiteFooter({
         <span className="block md:inline">{copyright}</span>
         <span className="block md:inline">{tagline}</span>
         <span className="block md:inline">
-          <a href={privacyHref} className="text-wine hover:opacity-70">Politica de confidențialitate</a>{' · '}
-          <a href={termsHref} className="text-wine hover:opacity-70">Termeni și condiții</a>
+          <a href={privacyHref} className="block text-wine hover:opacity-70 md:inline">Politica de confidențialitate</a><span className="hidden md:inline">{' · '}</span>
+          <a href={termsHref} className="block text-wine hover:opacity-70 md:inline">Termeni și condiții</a><span className="hidden md:inline">{' · '}</span>
+          <button
+            type="button"
+            className="block cursor-pointer border-0 bg-transparent p-0 font-[inherit] text-[10px] text-wine hover:opacity-70 md:inline"
+            onClick={() =>
+              window.dispatchEvent(new Event('fh:open-cookie-preferences'))
+            }
+          >
+            Setări cookie-uri
+          </button>
         </span>
         {instagramHref && (
           <a
