@@ -19,7 +19,7 @@ export const brand = {
   subtitle: 'by Dr. Ana',
   fullName: 'Facial Harmony Clinic by Dr. Ana',
   city: 'Galați',
-  logoSrc: '/logo2.svg',
+  logoSrc: '/logo.svg',
   topbarLeft: 'Facial Harmony Clinic by Dr. Ana · Galați',
   phone: '+40 756 599 985',
   whatsapp: '40756599985',
