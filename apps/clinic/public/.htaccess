@@ -14,7 +14,7 @@ ErrorDocument 404 /404.html
   RewriteRule ^$ index.html [L]
   RewriteRule ^index\.html$ - [L]
   RewriteRule ^404\.html$ - [L]
-  RewriteRule ^proceduri/(biorevitalizare|augmentarea-buzelor|toxina-botulinica|mezoterapie)/?$ proceduri/$1/index.html [L]
+  RewriteRule ^proceduri/(biorevitalizare|augmentarea-buzelor|toxina-botulinica|mezoterapie|hiperhidroza)/?$ proceduri/$1/index.html [L]
   RewriteRule ^(politica-de-confidentialitate|termeni-si-conditii)/?$ $1/index.html [L]
 
   RewriteCond %{REQUEST_FILENAME} -f [OR]

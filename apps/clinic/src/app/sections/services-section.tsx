@@ -5,7 +5,7 @@ import {
   SectionHeading,
   SectionLabel,
 } from '@org/ui';
-import { Procedure } from '../../content/site-content';
+import { Procedure, priceFrom } from '../../content/site-content';
 
 export interface ServicesSectionProps {
   procedures: Procedure[];
@@ -13,7 +13,11 @@ export interface ServicesSectionProps {
 
 export function ServicesSection({ procedures }: ServicesSectionProps) {
   return (
-    <Section id="servicii" className="py-20 md:py-[120px]">
+    <Section
+      id="servicii"
+      tabIndex={-1}
+      className="py-20 outline-none md:py-[120px]"
+    >
       <Container>
         <div className="mb-[55px] block md:flex md:items-end md:justify-between">
           <div>
@@ -33,9 +37,9 @@ export function ServicesSection({ procedures }: ServicesSectionProps) {
           {procedures.map((procedure, index) => (
             <ProcedureCard
               key={procedure.title}
-              number={procedure.number}
               title={procedure.title}
               description={procedure.description}
+              price={priceFrom(procedure)}
               action="Detalii procedură"
               href={`/proceduri/${procedure.slug}`}
               featured={index === 1 || index === 3}
