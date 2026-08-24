@@ -29,7 +29,7 @@ export function ServicesSection({ procedures }: ServicesSectionProps) {
             fără presiune și fără promisiuni nerealiste.
           </p>
         </div>
-        <div className="grid gap-[12px] md:grid-cols-4">
+        <div className="grid gap-8 md:grid-cols-3">
           {procedures.map((procedure, index) => (
             <ProcedureCard
               key={procedure.title}
@@ -38,7 +38,7 @@ export function ServicesSection({ procedures }: ServicesSectionProps) {
               description={procedure.description}
               action="Detalii procedură"
               href={`/proceduri/${procedure.slug}`}
-              featured={index === 1}
+              featured={index === 1 || index === 3}
             />
           ))}
         </div>
