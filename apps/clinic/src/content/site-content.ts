@@ -71,7 +71,7 @@ export const procedures: Procedure[] = [
       'Mezoterapie facială în Galați | Facial Harmony Clinic by Dr. Ana',
     metaDescription:
       'Mezoterapie facială în Galați cu Suisselle CELLBOOSTER® Glow, pentru hidratare, luminozitate și revitalizarea pielii.',
-    product: 'Suisselle CELLBOOSTER® Glow, 3 ml',
+    product: 'Suisselle CELLBOOSTER® Glow',
     intro:
       'Mezoterapia facială cu Suisselle CELLBOOSTER® Glow este un tratament injectabil dedicat hidratării, luminozității și îmbunătățirii aspectului general al pielii.',
     details: [
@@ -82,8 +82,12 @@ export const procedures: Procedure[] = [
     ],
     pricing: [
       {
-        label: 'Mezoterapie facială — CELLBOOSTER® Glow, 3 ml',
-        value: '800 lei față, 1200 lei față plus gât',
+        label: 'Mezoterapie facială — CELLBOOSTER® Glow',
+        value: '800 lei față',
+      },
+      {
+        label: 'Mezoterapie facială — CELLBOOSTER® Glow',
+        value: '1200 lei față plus gât',
       },
     ],
   },
@@ -95,7 +99,7 @@ export const procedures: Procedure[] = [
     metaTitle: 'Biorevitalizare în Galați | Facial Harmony Clinic by Dr. Ana',
     metaDescription:
       'Biorevitalizare facială în Galați cu Suisselle CELLBOOSTER® Lift, pentru hidratare profundă și îmbunătățirea calității pielii.',
-    product: 'Suisselle CELLBOOSTER® Lift, 3 ml',
+    product: 'Suisselle CELLBOOSTER® Lift',
     intro:
       'Biorevitalizarea cu Suisselle CELLBOOSTER® Lift este destinată pielii deshidratate, lipsite de luminozitate sau cu semne ușoare de pierdere a fermității.',
     details: [
@@ -106,7 +110,7 @@ export const procedures: Procedure[] = [
     ],
     pricing: [
       {
-        label: 'Biorevitalizare facială — CELLBOOSTER® Lift, 3 ml',
+        label: 'Biorevitalizare facială — CELLBOOSTER® Lift',
         value: '1.000 lei / ședință',
       },
     ],
