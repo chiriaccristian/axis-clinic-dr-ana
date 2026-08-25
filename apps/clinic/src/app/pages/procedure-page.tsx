@@ -107,14 +107,14 @@ export function ProcedurePage() {
         </Section>
 
         {procedure.pricing?.length ? (
-          <Section tone="ivory" className="py-12 md:py-[95px]">
+          <Section id="pricing" tone="ivory" className="py-12 md:py-[95px]">
             <Container className="grid gap-[28px] md:grid-cols-[0.20fr_1.35fr] md:gap-[90px]">
               <SectionLabel>Tarife</SectionLabel>
               <div>
                 <SectionHeading>
                   Prețuri
                   <br />
-                  <em id="pricing">transparente.</em>
+                  <em>transparente.</em>
                 </SectionHeading>
                 {procedure.product && (
                   <p className="m-0 mt-[18px] text-[13px] tracking-[0.04em] text-[#8b6871]">
