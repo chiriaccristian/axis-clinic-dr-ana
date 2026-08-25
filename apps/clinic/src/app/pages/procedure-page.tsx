@@ -114,7 +114,7 @@ export function ProcedurePage() {
                 <SectionHeading>
                   Prețuri
                   <br />
-                  <em>transparente.</em>
+                  <em id="pricing">transparente.</em>
                 </SectionHeading>
                 {procedure.product && (
                   <p className="m-0 mt-[18px] text-[13px] tracking-[0.04em] text-[#8b6871]">
