@@ -83,7 +83,7 @@ export const procedures: Procedure[] = [
     pricing: [
       {
         label: 'Mezoterapie facială — CELLBOOSTER® Glow, 3 ml',
-        value: '800 lei / ședință',
+        value: '800 lei față, 1200 lei față plus gât',
       },
     ],
   },
@@ -162,7 +162,7 @@ export const procedures: Procedure[] = [
     ],
     pricing: [
       {
-        label: 'Contur și hidratare buze — 0,5–0,55 ml',
+        label: 'Contur și hidratare buze — 0,5 ml',
         value: '900 lei',
       },
       {

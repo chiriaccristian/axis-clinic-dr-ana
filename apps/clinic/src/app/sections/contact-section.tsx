@@ -15,7 +15,7 @@ export interface ContactSectionProps {
 
 export function ContactSection({ onRequestAppointment }: ContactSectionProps) {
   return (
-    <Section id="contact" tone="ivory" className="py-20 md:pt-[115px] md:pb-0">
+    <Section id="contact" tone="ivory" className="py-15 md:pt-[115px] md:pb-0">
       <Container className="grid gap-[28px] md:grid-cols-[1.15fr_0.85fr] md:gap-[100px]">
         <div>
           <SectionLabel>Contact</SectionLabel>

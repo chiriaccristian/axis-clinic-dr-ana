@@ -74,12 +74,9 @@ export function ProcedurePage() {
             <p className="m-0 max-w-[680px] font-serif text-[19px] leading-[1.55] text-[#58494f] md:text-[22px]">
               {procedure.intro}
             </p>
-            <div className="mt-6.25 flex flex-col items-start gap-5 md:mt-8.75 md:flex-row md:items-center md:gap-6.25">
+            <div className="mt-6.25 flex flex-row flex-wrap items-center gap-5 md:mt-8.75 md:gap-6.25">
               <Button onClick={openWhatsApp}>Solicită o consultație</Button>
-              <TextLink
-                href="/#servicii"
-                className="inline-block"
-              >
+              <TextLink href="/#servicii" className="inline-block">
                 Înapoi la toate procedurile
               </TextLink>
             </div>
@@ -115,9 +112,9 @@ export function ProcedurePage() {
               <SectionLabel>Tarife</SectionLabel>
               <div>
                 <SectionHeading>
-                  Prețuri transparente,
+                  Prețuri
                   <br />
-                  <em>fără costuri ascunse.</em>
+                  <em>transparente.</em>
                 </SectionHeading>
                 {procedure.product && (
                   <p className="m-0 mt-[18px] text-[13px] tracking-[0.04em] text-[#8b6871]">
@@ -142,9 +139,6 @@ export function ProcedurePage() {
                   stabilit la consultație, de cantitatea de produs necesară și
                   de indicația medicală. Consultația inițială este gratuită.
                 </p>
-                <Button className="mt-[25px]" onClick={openWhatsApp}>
-                  Întreabă despre tarif
-                </Button>
               </div>
             </Container>
           </Section>
@@ -180,7 +174,6 @@ export function ProcedurePage() {
           </Container>
         </Section>
       </main>
-
     </div>
   );
 }
