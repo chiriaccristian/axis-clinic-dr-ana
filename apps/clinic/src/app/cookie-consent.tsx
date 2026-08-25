@@ -4,6 +4,8 @@ import { Button } from '@org/ui';
 
 const STORAGE_KEY = 'fh-cookie-consent';
 const CONSENT_VERSION = 1;
+const GOOGLE_ANALYTICS_ID = 'G-7PYZC9VG77';
+const GOOGLE_ANALYTICS_SCRIPT_ID = 'google-analytics-script';
 export const OPEN_PREFERENCES_EVENT = 'fh:open-cookie-preferences';
 
 interface ConsentChoice {
@@ -17,6 +19,27 @@ interface StoredConsent extends ConsentChoice {
 }
 
 type ConsentSignal = 'granted' | 'denied';
+
+function loadGoogleAnalytics() {
+  if (typeof window === 'undefined' || document.getElementById(GOOGLE_ANALYTICS_SCRIPT_ID)) {
+    return;
+  }
+
+  const scope = window as typeof window & {
+    dataLayer?: unknown[];
+    gtag?: (...args: unknown[]) => void;
+  };
+  scope.dataLayer = scope.dataLayer ?? [];
+  scope.gtag = scope.gtag ?? ((...args: unknown[]) => scope.dataLayer?.push(args));
+  scope.gtag('js', new Date());
+  scope.gtag('config', GOOGLE_ANALYTICS_ID);
+
+  const script = document.createElement('script');
+  script.id = GOOGLE_ANALYTICS_SCRIPT_ID;
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`;
+  document.head.appendChild(script);
+}
 
 function pushConsent({ analytics, marketing }: ConsentChoice) {
   const granted = (value: boolean): ConsentSignal => (value ? 'granted' : 'denied');
@@ -39,6 +62,10 @@ function pushConsent({ analytics, marketing }: ConsentChoice) {
   }
 
   layer.push({ event: 'cookie_consent_update', analytics_consent: analytics, marketing_consent: marketing });
+
+  if (analytics) {
+    loadGoogleAnalytics();
+  }
 }
 
 function readConsent(): StoredConsent | null {
