@@ -41,7 +41,7 @@ export function SiteFooter({
   location,
 }: SiteFooterProps) {
   return (
-    <footer className="mt-[45px] block border-t border-line pt-[23px] pb-[30px] text-[10px] leading-[2] text-[#6d565b] md:mt-[95px] md:leading-[2.3]">
+    <footer className="mt-5 block border-t border-line pt-5.75 pb-7.5 text-[10px] leading-loose text-[#6d565b] md:mt-23.75 md:leading-[2.3]">
       <div className="block md:flex md:justify-between md:leading-normal">
         <span className="block md:inline">{copyright}</span>
         <span className="block md:inline">{tagline}</span>
