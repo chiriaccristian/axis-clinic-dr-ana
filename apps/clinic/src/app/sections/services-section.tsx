@@ -13,14 +13,11 @@ export interface ServicesSectionProps {
 
 export function ServicesSection({ procedures }: ServicesSectionProps) {
   return (
-    <Section
-      id="servicii"
-      className="py-15 outline-none md:py-[120px]"
-    >
+    <Section id="servicii" className="py-15 outline-none md:py-[120px]">
       <Container>
         <div className="mb-[55px] block md:flex md:items-end md:justify-between">
-          <div className="grid gap-7 md:grid-cols-[0.30fr_1.35fr]">
-            <SectionLabel>Proceduri</SectionLabel>
+          <div>
+            <SectionLabel className="mb-5">Proceduri</SectionLabel>
             <SectionHeading>
               Un plan pentru
               <br />
