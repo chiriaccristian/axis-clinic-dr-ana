@@ -1,6 +1,5 @@
 export interface SiteFooterProps {
   copyright: string;
-  tagline: string;
   backToTopLabel: string;
   backToTopHref?: string;
   instagramHref?: string;
@@ -30,7 +29,6 @@ function InstagramIcon() {
 
 export function SiteFooter({
   copyright,
-  tagline,
   backToTopLabel,
   backToTopHref = '#top',
   instagramHref,
@@ -43,11 +41,22 @@ export function SiteFooter({
   return (
     <footer className="mt-5 block border-t border-line pt-5.75 pb-7.5 text-[10px] leading-loose text-[#6d565b] md:mt-23.75 md:leading-[2.3]">
       <div className="block md:flex md:justify-between md:leading-normal">
-        <span className="block md:inline">{copyright}</span>
-        <span className="block md:inline">{tagline}</span>
+        <span className="block text-wine md:inline">{copyright}</span>
         <span className="block md:inline">
-          <a href={privacyHref} className="block text-wine hover:opacity-70 md:inline">Politica de confidențialitate</a><span className="hidden md:inline">{' · '}</span>
-          <a href={termsHref} className="block text-wine hover:opacity-70 md:inline">Termeni și condiții</a><span className="hidden md:inline">{' · '}</span>
+          <a
+            href={privacyHref}
+            className="block text-wine hover:opacity-70 md:inline"
+          >
+            Politica de confidențialitate
+          </a>
+          <span className="hidden md:inline">{' · '}</span>
+          <a
+            href={termsHref}
+            className="block text-wine hover:opacity-70 md:inline"
+          >
+            Termeni și condiții
+          </a>
+          <span className="hidden md:inline">{' · '}</span>
           <button
             type="button"
             className="block cursor-pointer border-0 bg-transparent p-0 font-[inherit] text-[10px] text-wine hover:opacity-70 md:inline"
@@ -81,11 +90,20 @@ export function SiteFooter({
           itemType="https://schema.org/Organization"
         >
           <span itemProp="name">{legalName}</span>
-          {vatId && <>{' · '}<span itemProp="vatID">{vatId}</span></>}
+          {vatId && (
+            <>
+              {' · '}
+              <span itemProp="vatID">{vatId}</span>
+            </>
+          )}
           {location && (
             <>
               {' · '}
-              <span itemProp="address" itemScope itemType="https://schema.org/PostalAddress">
+              <span
+                itemProp="address"
+                itemScope
+                itemType="https://schema.org/PostalAddress"
+              >
                 <span itemProp="addressLocality">{location}</span>
               </span>
             </>

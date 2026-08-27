@@ -43,10 +43,26 @@ export function ClinicDesign() {
           </>
         }
         right={
-          <>
-            <span className="block md:inline">Programări:</span>{' '}
-            <b className="block md:inline">{brand.phone}</b>
-          </>
+          <a
+            href={brand.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Vezi Facial Harmony Clinic by Dr. Ana pe Instagram"
+            className="inline-flex items-center text-rose transition-opacity hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose"
+          >
+            <svg
+              aria-hidden="true"
+              className="h-4 w-4 text-[#f5e9e5]"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.7"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+            </svg>
+          </a>
         }
       />
       <SiteHeader
@@ -60,8 +76,8 @@ export function ClinicDesign() {
 
       <main id="top">
         <HeroSection onRequestAppointment={openWhatsApp} />
-        <AboutSection />
         <ServicesSection procedures={procedures} />
+        <AboutSection />
         <PhilosophySection values={values} />
         <ContactSection onRequestAppointment={openWhatsApp} />
       </main>

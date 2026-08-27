@@ -2,7 +2,7 @@ import { Container, Section, SectionHeading, SectionLabel } from '@org/ui';
 
 export function AboutSection() {
   return (
-    <Section id="despre" tone="blush" className="py-15 md:py-[105px]">
+    <Section id="despre" tone="ivory" className="py-15 md:py-[105px]">
       <Container className="grid gap-7 md:grid-cols-[0.30fr_1.35fr]">
         <SectionLabel>Despre Dr. Ana</SectionLabel>
         <div>
