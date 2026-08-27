@@ -40,6 +40,34 @@ export function ContactSection({ onRequestAppointment }: ContactSectionProps) {
           <DetailItem label="Email">
             <a href={`mailto:${brand.email}`}>{brand.email}</a>
           </DetailItem>
+          <DetailItem label="LOCAȚIE">
+            <address className="not-italic">
+              <strong className="font-normal text-wine">{brand.addressName}</strong>
+              <br />
+              <span>{brand.address}</span>
+              <br />
+              <a
+                href={brand.mapsHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Vezi ${brand.addressName}, ${brand.address}, pe Google Maps`}
+                className="mt-2 inline-flex items-center gap-1.5 text-[#8b6871] hover:opacity-70"
+              >
+                <svg
+                  aria-hidden="true"
+                  className="h-4 w-4 shrink-0"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.7"
+                >
+                  <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" />
+                  <circle cx="12" cy="10" r="2.5" />
+                </svg>
+                Vezi locația pe hartă
+              </a>
+            </address>
+          </DetailItem>
           <DetailItem label="Specializare">
             <p>
               Chirurgie orală și maxilo-facială,
@@ -52,7 +80,6 @@ export function ContactSection({ onRequestAppointment }: ContactSectionProps) {
       <Container>
         <SiteFooter
           copyright={footer.copyright}
-          tagline={footer.tagline}
           backToTopLabel={footer.backToTopLabel}
           instagramHref={brand.instagram}
           legalName={footer.legalName}

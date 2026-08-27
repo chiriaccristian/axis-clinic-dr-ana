@@ -45,7 +45,7 @@ export function ProcedureCard({
         {price && (
           <p
             className={cn(
-              'mt-4 mb-0 font-serif text-[15px]',
+              'mt-4 mb-0 hidden font-serif text-[15px] md:block',
               featured ? 'text-white' : 'text-wine',
             )}
           >
@@ -53,16 +53,31 @@ export function ProcedureCard({
           </p>
         )}
       </div>
-      {href ? (
-        <a
-          href={href}
-          className={cn(actionClassName, 'after:absolute after:inset-0')}
-        >
-          {action}
-        </a>
-      ) : (
-        <div className={actionClassName}>{action}</div>
-      )}
+      <div className="flex items-end justify-between gap-4 md:block">
+        {price && (
+          <p
+            className={cn(
+              'm-0 font-serif text-[15px] md:hidden',
+              featured ? 'text-white' : 'text-wine',
+            )}
+          >
+            {price}
+          </p>
+        )}
+        {href ? (
+          <a
+            href={href}
+            className={cn(
+              actionClassName,
+              'border-b border-[#bba3a5] pb-1.5 after:absolute after:inset-0 md:border-b-0 md:pb-0',
+            )}
+          >
+            {action}
+          </a>
+        ) : (
+          <div className={actionClassName}>{action}</div>
+        )}
+      </div>
     </article>
   );
 }

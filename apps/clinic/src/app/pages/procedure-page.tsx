@@ -35,6 +35,8 @@ export function ProcedurePage() {
     return <Navigate to="/" replace />;
   }
 
+  const hasPricing = Boolean(procedure.pricing?.length);
+
   return (
     <div className="overflow-hidden">
       <TopBar
@@ -45,10 +47,26 @@ export function ProcedurePage() {
           </>
         }
         right={
-          <>
-            <span className="block md:inline">Programări:</span>{' '}
-            <b className="block md:inline">{brand.phone}</b>
-          </>
+          <a
+            href={brand.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Vezi Facial Harmony Clinic by Dr. Ana pe Instagram"
+            className="inline-flex items-center text-rose transition-opacity hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose"
+          >
+            <svg
+              aria-hidden="true"
+              className="h-4 w-4 text-[#f5e9e5]"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.7"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+            </svg>
+          </a>
         }
       />
       <SiteHeader
@@ -83,7 +101,7 @@ export function ProcedurePage() {
           </Container>
         </Section>
 
-        <Section className="py-12 md:py-[110px]">
+        <Section tone="blush" className="py-12 md:py-[110px]">
           <Container className="grid gap-[28px] md:grid-cols-[0.20fr_1.35fr] md:gap-[90px]">
             <SectionLabel>Cum lucrăm</SectionLabel>
             <div>
@@ -106,7 +124,7 @@ export function ProcedurePage() {
           </Container>
         </Section>
 
-        {procedure.pricing?.length ? (
+        {hasPricing ? (
           <Section id="pricing" tone="ivory" className="py-12 md:py-[95px]">
             <Container className="grid gap-[28px] md:grid-cols-[0.20fr_1.35fr] md:gap-[90px]">
               <SectionLabel>Tarife</SectionLabel>
@@ -144,7 +162,10 @@ export function ProcedurePage() {
           </Section>
         ) : null}
 
-        <Section tone="ivory" className="pt-12 pb-0 md:pt-[95px] md:pb-0">
+        <Section
+          tone={hasPricing ? 'blush' : 'ivory'}
+          className="pt-12 pb-0 md:pt-[95px] md:pb-0"
+        >
           <Container>
             <SectionLabel>Contact</SectionLabel>
             <SectionHeading className="my-[18px] md:my-[22px]">
@@ -164,7 +185,6 @@ export function ProcedurePage() {
           <Container>
             <SiteFooter
               copyright={footer.copyright}
-              tagline={footer.tagline}
               backToTopLabel={footer.backToTopLabel}
               instagramHref={brand.instagram}
               legalName={footer.legalName}

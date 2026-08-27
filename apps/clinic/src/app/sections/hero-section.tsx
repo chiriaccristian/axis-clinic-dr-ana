@@ -52,7 +52,7 @@ export function HeroSection({ onRequestAppointment }: HeroSectionProps) {
           </div>
         </div>
 
-        <div className="relative h-[480px] pr-7 md:h-[600px]">
+        <div className="relative h-[390px] pr-7 md:h-[490px]">
           <div className="relative h-full after:pointer-events-none after:absolute after:inset-y-[22px] after:right-0 after:left-[22px] after:border after:border-white/60 after:content-['']">
             <picture>
               <source
