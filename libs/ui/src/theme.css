@@ -1,18 +1,29 @@
 /* Design system tokens for the clinic visual identity.
    Consumed by the app together with `@import 'tailwindcss'`. */
 @theme {
-  --color-ink: #18353e;
-  --color-wine: #245465;
-  --color-rose: #b8dfe0;
-  --color-blush: #e6f1f0;
-  --color-ivory: #f8fbfa;
-  --color-muted: #6d7f82;
-  --color-line: #d6e3e2;
-  --color-accent: #6b9696;
-  --color-topbar: #f5e9e5;
+  /*--color-ink: #18353e;*/
+  /*--color-wine: #245465;*/
+  /*--color-rose: #b8dfe0;*/
+  /*--color-blush: #e6f1f0;*/
+  /*--color-ivory: #f8fbfa;*/
+  /*--color-muted: #6d7f82;*/
+  /*--color-line: #d6e3e2;*/
+  /*--color-accent: #6b9696;*/
+  /*--color-topbar: #f5e9e5;*/
+  --color-ink: #3D2730;
+  --color-wine: #62303F;
+  --color-rose: #B9878B;
+  --color-blush: #F2E3DE;
+  --color-ivory: #FCF8F6;
+  --color-muted: #806A70;
+  --color-line: #E7D7D2;
+  --color-accent: #C9A28F;
+  --color-topbar: #F5E9E5;
 
-  --font-sans: 'DM Sans', sans-serif;
-  --font-serif: 'Playfair Display', serif;
+  /*--font-sans: 'DM Sans', sans-serif;*/
+  /*--font-serif: 'Playfair Display', serif;*/
+  --font-sans: 'Manrope', sans-serif;
+  --font-serif: 'Cormorant Garamond', serif;
 
   --breakpoint-sm: 801px;
   --breakpoint-md: 801px;

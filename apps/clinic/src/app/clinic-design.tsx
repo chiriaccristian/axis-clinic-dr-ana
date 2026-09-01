@@ -52,7 +52,7 @@ export function ClinicDesign() {
           >
             <svg
               aria-hidden="true"
-              className="h-4 w-4 text-[#f5e9e5]"
+              className="h-7 w-7 text-topbar md:h-6 md:w-6"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
