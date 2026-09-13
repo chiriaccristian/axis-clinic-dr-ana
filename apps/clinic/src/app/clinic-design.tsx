@@ -43,26 +43,44 @@ export function ClinicDesign() {
           </>
         }
         right={
-          <a
-            href={brand.instagram}
+          <>
+            <a
+              href={brand.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Vezi Facial Harmony Clinic by Dr. Ana pe Instagram"
+              className="inline-flex items-center text-rose transition-opacity hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose"
+            >
+              <svg
+                aria-hidden="true"
+                className="h-7 w-7 text-topbar md:h-6 md:w-6"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.7"
+              >
+                <rect x="3" y="3" width="18" height="18" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+              </svg>
+            </a>
+            <a
+            href={brand.facebook}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Vezi Facial Harmony Clinic by Dr. Ana pe Instagram"
-            className="inline-flex items-center text-rose transition-opacity hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose"
+            aria-label="Vezi Facial Harmony Clinic by Dr. Ana pe Facebook"
+            className="ml-3 inline-flex items-center text-rose transition-opacity hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose"
           >
             <svg
               aria-hidden="true"
               className="h-7 w-7 text-topbar md:h-6 md:w-6"
               viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.7"
+              fill="currentColor"
             >
-              <rect x="3" y="3" width="18" height="18" rx="5" />
-              <circle cx="12" cy="12" r="4" />
-              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+              <path d="M13.5 21v-8h2.75l.42-3h-3.17V8.08c0-.87.24-1.46 1.5-1.46h1.8V3.94c-.31-.04-1.38-.14-2.63-.14-2.6 0-4.38 1.59-4.38 4.51V10H7v3h2.79v8h3.71Z" />
             </svg>
-          </a>
+            </a>
+          </>
         }
       />
       <SiteHeader

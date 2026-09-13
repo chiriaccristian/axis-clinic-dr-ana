@@ -187,6 +187,7 @@ export function ProcedurePage() {
               copyright={footer.copyright}
               backToTopLabel={footer.backToTopLabel}
               instagramHref={brand.instagram}
+              facebookHref={brand.facebook}
               legalName={footer.legalName}
               vatId={footer.vatId}
               location={footer.location}
