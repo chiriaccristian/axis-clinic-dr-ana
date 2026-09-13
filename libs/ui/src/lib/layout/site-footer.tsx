@@ -3,6 +3,7 @@ export interface SiteFooterProps {
   backToTopLabel: string;
   backToTopHref?: string;
   instagramHref?: string;
+  facebookHref?: string;
   privacyHref?: string;
   termsHref?: string;
   legalName?: string;
@@ -27,11 +28,20 @@ function InstagramIcon() {
   );
 }
 
+function FacebookIcon() {
+  return (
+    <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M13.5 21v-8h2.75l.42-3h-3.17V8.08c0-.87.24-1.46 1.5-1.46h1.8V3.94c-.31-.04-1.38-.14-2.63-.14-2.6 0-4.38 1.59-4.38 4.51V10H7v3h2.79v8h3.71Z" />
+    </svg>
+  );
+}
+
 export function SiteFooter({
   copyright,
   backToTopLabel,
   backToTopHref = '#top',
   instagramHref,
+  facebookHref,
   privacyHref = '/politica-de-confidentialitate',
   termsHref = '/termeni-si-conditii',
   legalName,
@@ -77,6 +87,18 @@ export function SiteFooter({
           >
             <InstagramIcon />
             <span>Instagram</span>
+          </a>
+        )}
+        {facebookHref && (
+          <a
+            href={facebookHref}
+            aria-label="Urmărește-ne pe Facebook"
+            className="flex items-center gap-2 text-wine transition-opacity hover:opacity-70 md:inline-flex"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FacebookIcon />
+            <span>Facebook</span>
           </a>
         )}
         <a href={backToTopHref} className="block text-wine md:inline">

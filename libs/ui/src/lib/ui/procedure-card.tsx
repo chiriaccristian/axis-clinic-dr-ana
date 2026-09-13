@@ -27,7 +27,7 @@ export function ProcedureCard({
   return (
     <article
       className={cn(
-        'relative flex min-h-[260px] flex-col justify-between border p-[25px] transition-[transform,box-shadow] duration-[250ms] hover:-translate-y-1.5 hover:shadow-[0_15px_35px_#56364112] md:min-h-[375px]',
+        'relative flex min-h-60 flex-col justify-between border p-6.25 transition-[transform,box-shadow] duration-250 hover:-translate-y-1.5 hover:shadow-[0_15px_35px_#56364112] md:min-h-75',
         featured ? 'border-wine bg-wine text-white' : 'border-line bg-white',
         className,
       )}

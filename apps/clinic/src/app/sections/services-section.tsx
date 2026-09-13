@@ -12,6 +12,7 @@ export interface ServicesSectionProps {
 }
 
 export function ServicesSection({ procedures }: ServicesSectionProps) {
+
   return (
     <Section
       id="servicii"
@@ -42,7 +43,7 @@ export function ServicesSection({ procedures }: ServicesSectionProps) {
               price={priceFrom(procedure)}
               action="Detalii procedură"
               href={`/proceduri/${procedure.slug}`}
-              featured={index === 1 || index === 3}
+              featured={index % 2 !== 0}
             />
           ))}
         </div>
