@@ -128,7 +128,7 @@ export const procedures: Procedure[] = [
     ],
   },
   {
-    slug: 'remodelare-faciala-barbie-dubla',
+    slug: 'remodelare-faciala',
     title: 'Remodelare și conturare facială',
     description:
       'Remodelare și conturare facială pentru bărbia dublă, cu beneficii pentru fermitatea, hidratarea și aspectul pielii.',
