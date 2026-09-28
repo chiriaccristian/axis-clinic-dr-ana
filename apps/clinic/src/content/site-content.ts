@@ -47,7 +47,7 @@ export const brand = {
   phone: '+40 756 599 985',
   whatsapp: '40756599985',
   email: 'facial.harmony@drana.ro',
-  addressName: 'Dental One Studio',
+  addressName: 'ELIA Clinc',
   address: 'Strada Cosminului nr. 13',
   mapsHref:
     'https://www.google.com/maps/search/?api=1&query=Dental%20One%20Studio%2C%20Strada%20Cosminului%20nr.%2013',
