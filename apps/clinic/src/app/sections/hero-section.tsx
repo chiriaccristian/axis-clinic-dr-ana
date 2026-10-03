@@ -18,9 +18,7 @@ export function HeroSection({ onRequestAppointment }: HeroSectionProps) {
     <Section className="pt-[45px] pb-[75px] md:pt-[58px] md:pb-[110px]">
       <Container className="grid items-center gap-[45px] md:grid-cols-[1fr_1.08fr] md:gap-[75px]">
         <div>
-          <Eyebrow>
-            Chirurgie orală și maxilo-facială · Galați
-          </Eyebrow>
+          <Eyebrow>Chirurgie orală și maxilo-facială · Galați</Eyebrow>
           <DisplayHeading>
             Chipul tău
             <br />
@@ -52,7 +50,7 @@ export function HeroSection({ onRequestAppointment }: HeroSectionProps) {
           </div>
         </div>
 
-        <div className="relative h-[390px] pr-7 md:h-[490px]">
+        <div className="relative 100 pr-7 md:h-122.5">
           <div className="relative h-full after:pointer-events-none after:absolute after:inset-y-[22px] after:right-0 after:left-[22px] after:border after:border-white/60 after:content-['']">
             <picture>
               <source
@@ -72,10 +70,9 @@ export function HeroSection({ onRequestAppointment }: HeroSectionProps) {
                 height={1024}
                 fetchPriority="high"
                 decoding="async"
-                className="h-full w-full object-cover object-[center_28%]"
+                className="h-full w-full object-cover object-[center_18%] md:object-top"
               />
             </picture>
-            <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(86,54,65,0.02),rgba(86,54,65,0.1))]" />
           </div>
           <PhotoLabel overline="Dr. ANA point of view">
             Rezultate care

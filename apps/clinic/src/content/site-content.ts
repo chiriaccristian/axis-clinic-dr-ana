@@ -12,7 +12,7 @@ export type Procedure = {
   intro: string;
   details: string[];
   product?: string;
-  pricing?: ProcedurePrice[];
+  pricing: ProcedurePrice[];
 };
 
 export function priceFrom(procedure: Procedure): string | undefined {
@@ -74,10 +74,9 @@ export const procedures: Procedure[] = [
       'Estomparea ridurilor de expresie, cu obiectivul de a păstra expresivitatea naturală a feței.',
     metaTitle: 'Toxină botulinică în Galați | Facial Harmony Clinic by Dr. Ana',
     metaDescription:
-      'Tratament cu toxină botulinică Azzalure în Galați, pentru ridurile de expresie și un rezultat natural, adaptat feței tale.',
-    product: 'Azzalure',
+      'Tratament cu toxină botulinică în Galați, pentru ridurile de expresie și un rezultat natural, adaptat feței tale.',
     intro:
-      'Tratamentul cu toxină botulinică Azzalure este personalizat după dinamica musculară a feței, fără aplicarea unei scheme standard pentru fiecare pacient.',
+      'Tratamentul cu toxină botulinică este personalizat după dinamica musculară a feței, fără aplicarea unei scheme standard pentru fiecare pacient.',
     details: [
       'Evaluăm expresivitatea feței, dinamica musculară și zonele care te deranjează.',
       'Tratamentul poate viza zona frunții, glabela și ridurile perioculare.',
@@ -87,15 +86,15 @@ export const procedures: Procedure[] = [
     pricing: [
       {
         label: '1 zonă',
-        value: '550 lei',
+        value: '800 lei',
       },
       {
         label: '2 zone',
-        value: '950 lei',
+        value: '1200 lei',
       },
       {
         label: '3 zone',
-        value: '1.300 lei',
+        value: '1.500 lei',
       },
     ],
   },
@@ -106,24 +105,24 @@ export const procedures: Procedure[] = [
       'Contur, hidratare și volum armonios, adaptate proporțiilor feței pentru un rezultat natural.',
     metaTitle: 'Augmentarea buzelor cu acid hialuronic în Galați | Dr. Ana',
     metaDescription:
-      'Augmentarea buzelor în Galați cu acid hialuronic Stylage®, pentru contur, hidratare și volum adaptate proporțiilor feței.',
-    product: 'Acid hialuronic Stylage®',
+      'Augmentarea buzelor în Galați cu acid hialuronic RESTYLANE, pentru contur, hidratare și volum adaptate proporțiilor feței.',
+    product: 'Acid hialuronic RESTYLANE',
     intro:
-      'Augmentarea buzelor cu acid hialuronic Stylage® urmărește echilibrul facial și păstrarea expresivității, nu un model impus.',
+      'Augmentarea buzelor cu acid hialuronic RESTYLANE urmărește echilibrul facial și păstrarea expresivității, nu un model impus.',
     details: [
       'Discutăm ce îți dorești, ce te deranjează și stabilim împreună un plan potrivit anatomiei buzelor tale.',
-      'Produsul Stylage® și volumul administrat sunt alese individual, în funcție de rezultat și indicația medicală.',
+      'Produsul RESTYLANE și volumul administrat sunt alese individual, în funcție de rezultat și indicația medicală.',
       'Procedura se realizează cu anestezie locală sau topică, pentru un confort cât mai bun.',
       'Edemul este temporar, iar controlul și recomandările post-procedură sunt oferite individual.',
     ],
     pricing: [
       {
         label: 'Contur și hidratare buze — 0,5 ml',
-        value: '900 lei',
+        value: '1200 lei',
       },
       {
         label: 'Augmentare buze — 1 ml',
-        value: '1.300 lei',
+        value: '1.500 lei',
       },
     ],
   },
@@ -149,11 +148,11 @@ export const procedures: Procedure[] = [
     pricing: [
       {
         label: 'CELLBOOSTER® Shape — 1 flacon',
-        value: '590 lei / ședință',
+        value: '690 lei / ședință',
       },
       {
         label: 'Pachet 3 ședințe — 1 flacon / ședință',
-        value: '1.590 lei',
+        value: '1.690 lei',
       },
     ],
   },
