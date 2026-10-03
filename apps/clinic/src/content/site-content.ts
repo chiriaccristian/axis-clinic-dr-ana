@@ -90,7 +90,7 @@ export const procedures: Procedure[] = [
       },
       {
         label: '2 zone',
-        value: '1200 lei',
+        value: '1.200 lei',
       },
       {
         label: '3 zone',
@@ -118,7 +118,7 @@ export const procedures: Procedure[] = [
     pricing: [
       {
         label: 'Contur și hidratare buze — 0,5 ml',
-        value: '1200 lei',
+        value: '1.200 lei',
       },
       {
         label: 'Augmentare buze — 1 ml',
