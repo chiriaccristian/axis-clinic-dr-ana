@@ -217,8 +217,7 @@ export const procedures: Procedure[] = [
     metaTitle:
       'Tratamentul hiperhidrozei în Galați | Facial Harmony Clinic by Dr. Ana',
     metaDescription:
-      'Tratamentul hiperhidrozei axilare în Galați cu Azzalure, pentru reducerea transpirației excesive printr-un protocol personalizat.',
-    product: 'Azzalure',
+      'Tratamentul hiperhidrozei axilare în Galați, pentru reducerea transpirației excesive printr-un protocol personalizat.',
     intro:
       'Hiperhidroza poate afecta confortul de zi cu zi și încrederea în sine. Tratamentul cu toxină botulinică poate reduce temporar activitatea glandelor sudoripare din zona tratată.',
     details: [
