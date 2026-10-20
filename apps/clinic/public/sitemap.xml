@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://drana.ro/</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-20</lastmod>
   </url>
   <url>
     <loc>https://drana.ro/proceduri/biorevitalizare</loc>
@@ -11,6 +11,10 @@
   <url>
     <loc>https://drana.ro/proceduri/augmentarea-buzelor</loc>
     <lastmod>2026-08-19</lastmod>
+  </url>
+  <url>
+    <loc>https://drana.ro/proceduri/sculptra</loc>
+    <lastmod>2026-10-20</lastmod>
   </url>
   <url>
     <loc>https://drana.ro/proceduri/toxina-botulinica</loc>
