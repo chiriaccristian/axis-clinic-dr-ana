@@ -4,8 +4,10 @@ cPanel AI App Hosting entry point for `crm-test.drana.ro`.
 
 The root `package.json` lists React and Vite (for the public site), so the
 hosting detects the repository root as a static site. This folder has its own
-`package.json` with no frontend dependencies, so it is detected as a Node.js
-server.
+`package.json` with no frontend dependencies. It lists `express` as a
+dependency because the hosting picks the Node.js server category from the
+server framework it finds in `dependencies`; without one the folder is still
+detected as static.
 
 cPanel settings:
 
@@ -15,4 +17,5 @@ cPanel settings:
 - Output directory: `dist`
 
 `npm run build` installs the monorepo from the root and bundles the API
-(express included) into `dist/main.js`, so `npm start` needs no `node_modules`.
+(express included) into `dist/main.js`, so `npm start` does not depend on the
+`express` copy installed here.
