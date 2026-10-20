@@ -1,12 +1,12 @@
 name: Deploy CRM Test (crm-test.drana.ro)
 
 # Test environment, fully separate from the live site:
-# - runs only on the `staging` branch (live deploys from `main` in deploy.yml)
+# - runs only on the `develop` branch (live deploys from `main` in deploy.yml)
 # - uses its own FTP account, limited in cPanel to the Node.js app folder
 on:
   push:
     branches:
-      - staging
+      - develop
   workflow_dispatch:
 
 concurrency:
