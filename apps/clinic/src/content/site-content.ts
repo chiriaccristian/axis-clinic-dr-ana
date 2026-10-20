@@ -37,6 +37,13 @@ export interface Value {
   description: string;
 }
 
+export interface Testimonial {
+  quote: string;
+  /** Short display name (first name + initial), shown only with consent. */
+  author?: string;
+  source?: string;
+}
+
 export const brand = {
   name: 'Facial Harmony Clinic',
   subtitle: 'by Dr. Ana',
@@ -63,6 +70,7 @@ export const navLinks = [
   { id: 'despre', label: 'Despre Dr. Ana' },
   { id: 'servicii', label: 'Proceduri' },
   { id: 'filozofie', label: 'Abordare' },
+  { id: 'recenzii', label: 'Recenzii' },
   { id: 'contact', label: 'Contact' },
 ];
 
@@ -123,6 +131,31 @@ export const procedures: Procedure[] = [
       {
         label: 'Augmentare buze — 1 ml',
         value: '1.500 lei',
+      },
+    ],
+  },
+  {
+    slug: 'sculptra',
+    title: 'Sculptra — stimularea colagenului',
+    description:
+      'Stimularea producției proprii de colagen, pentru corectarea progresivă a pierderii de volum și îmbunătățirea aspectului pielii.',
+    metaTitle: 'Sculptra în Galați | Facial Harmony Clinic by Dr. Ana',
+    metaDescription:
+      'Tratament Sculptra în Galați, cu acid poli-L-lactic, pentru stimularea colagenului și corectarea progresivă a pierderii de volum facial.',
+    product: 'Sculptra® — acid poli-L-lactic (PLLA)',
+    intro:
+      'Sculptra® este un tratament injectabil pe bază de acid poli-L-lactic, care stimulează producția proprie de colagen. Tratamentul urmărește corectarea progresivă a pierderii de volum și îmbunătățirea aspectului pielii, printr-un plan adaptat anatomiei și nevoilor tale.',
+    details: [
+      'Începem cu o consultație pentru evaluarea feței, discutarea istoricului medical și stabilirea indicației de tratament.',
+      'Rezultatele se dezvoltă treptat, pe parcursul săptămânilor și lunilor; aspectul imediat după injectare nu reprezintă rezultatul final.',
+      'Numărul de ședințe și cantitatea de produs se stabilesc individual, în funcție de zonele tratate și răspunsul la tratament.',
+      'Rezultatele pot persista până la aproximativ 2 ani, cu variații de la o persoană la alta.',
+      'Pot apărea umflare, vânătăi, sensibilitate sau noduli; riscurile, contraindicațiile și recomandările post-procedură sunt discutate la consultație.',
+    ],
+    pricing: [
+      {
+        label: 'Tratament Sculptra® - 1 fiolă',
+        value: '3.000 lei',
       },
     ],
   },
@@ -240,6 +273,33 @@ export const values: Value[] = [
   { title: 'Precizie', description: 'Explic fiecare decizie medicală.' },
   { title: 'Naturalețe', description: 'Îți păstrezi expresivitatea.' },
   { title: 'Încredere', description: 'Rămân alături de tine și după.' },
+];
+
+export const testimonials: Testimonial[] = [
+  {
+    quote: 'Un medic foarte competent și empatic, recomand din suflet dr. Ana!',
+    author: 'Mia D.',
+    source: 'Facebook',
+  },
+  {
+    quote:
+      'Doamna dr. Ana mi-a explicat cu răbdare fiecare etapă și mi-a răspuns la toate întrebările. Am apreciat atenția la detalii și felul în care m-a făcut să mă simt în largul meu.',
+  },
+  {
+    quote: 'Recomand din suflet, o doamnă doctor minunată și foarte dedicată!',
+    author: 'Andreea M.',
+    source: 'Facebook',
+  },
+  {
+    quote:
+      'O experiență plăcută, de la consultație până la recomandările de după procedură. Doamna dr. Ana a ascultat ce îmi doream și mi-a explicat ce mi se potrivește. M-am simțit ascultată și bine îngrijită.',
+  },
+  {
+    quote:
+      'Frumusețea înseamnă armonie, iar lucrările doamnei doctor sunt minunate!',
+    author: 'Nadia G.',
+    source: 'Facebook',
+  },
 ];
 
 export const appointmentOptions = [

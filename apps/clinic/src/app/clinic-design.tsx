@@ -4,6 +4,7 @@ import {
   brand,
   navLinks,
   procedures,
+  testimonials,
   values,
   whatsappHref,
 } from '../content/site-content';
@@ -12,6 +13,7 @@ import { ContactSection } from './sections/contact-section';
 import { HeroSection } from './sections/hero-section';
 import { PhilosophySection } from './sections/philosophy-section';
 import { ServicesSection } from './sections/services-section';
+import { TestimonialsSection } from './sections/testimonials-section';
 
 export function ClinicDesign() {
   useEffect(() => {
@@ -97,6 +99,7 @@ export function ClinicDesign() {
         <ServicesSection procedures={procedures} />
         <AboutSection />
         <PhilosophySection values={values} />
+        <TestimonialsSection testimonials={testimonials} />
         <ContactSection onRequestAppointment={openWhatsApp} />
       </main>
 
