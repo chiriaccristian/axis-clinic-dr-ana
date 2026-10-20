@@ -1,0 +1,13 @@
+{
+  "name": "crm-test-host",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Entry point for cPanel AI App Hosting (crm-test.drana.ro). Builds the API from the monorepo root into dist/main.js.",
+  "scripts": {
+    "build": "cd ../.. && npm ci && NX_NO_CLOUD=true npx nx run @org/api:build:production --thirdParty=true && mkdir -p deploy/crm-test/dist && cp apps/api/dist/main.js deploy/crm-test/dist/main.js",
+    "start": "node dist/main.js"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  }
+}
