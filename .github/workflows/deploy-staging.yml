@@ -1,0 +1,50 @@
+name: Deploy CRM Test (crm-test.drana.ro)
+
+# Test environment, fully separate from the live site:
+# - runs only on the `develop` branch (live deploys from `main` in deploy.yml)
+# - uses its own FTP account, limited in cPanel to the Node.js app folder
+on:
+  push:
+    branches:
+      - develop
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-staging
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Checkout code
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      # thirdParty bundles express into main.js, so the cPanel app needs no `npm install`
+      - name: 🏗️ Build API
+        run: npx nx run @org/api:build:production --thirdParty=true
+
+      - name: 📁 Prepare upload
+        run: |
+          mkdir -p deploy/tmp
+          cp apps/api/dist/main.js deploy/main.js
+          # Passenger restarts the app when tmp/restart.txt changes
+          date -u +%Y-%m-%dT%H:%M:%SZ > deploy/tmp/restart.txt
+
+      - name: 🚀 FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.CRMTEST_FTP_SERVER }}
+          username: ${{ secrets.CRMTEST_FTP_USERNAME }}
+          password: ${{ secrets.CRMTEST_FTP_PASSWORD }}
+          local-dir: ./deploy/
+          server-dir: ./
