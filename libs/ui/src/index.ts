@@ -16,5 +16,6 @@ export * from './lib/ui/photo-label';
 export * from './lib/ui/procedure-card';
 export * from './lib/ui/section-label';
 export * from './lib/ui/success-message';
+export * from './lib/ui/testimonial-card';
 export * from './lib/ui/text-link';
 export * from './lib/ui/value-item';

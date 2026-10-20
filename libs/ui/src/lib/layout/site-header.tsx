@@ -79,7 +79,7 @@ export function SiteHeader({
           aria-label={menuLabel}
           className={cn(
             'absolute inset-x-0 top-[109px] z-[5] flex-col items-start gap-8 border-b border-line bg-ivory px-5 py-[23px] text-[12px] text-[#75686d]',
-            'md:static md:z-auto md:flex md:flex-row md:items-center md:border-0 md:bg-transparent md:p-0',
+            'md:static md:z-auto md:flex md:flex-row md:items-center md:gap-5 md:border-0 md:bg-transparent md:p-0 lg:gap-8',
             menuOpen ? 'flex' : 'hidden',
           )}
         >
@@ -88,12 +88,16 @@ export function SiteHeader({
               key={id}
               href={`${linkHrefBase}#${id}`}
               onClick={() => setMenuOpen(false)}
-              className="hover:text-wine"
+              className="whitespace-nowrap hover:text-wine"
             >
               {label}
             </a>
           ))}
-          <Button variant="nav" onClick={onCtaClick}>
+          <Button
+            variant="nav"
+            className="whitespace-nowrap"
+            onClick={onCtaClick}
+          >
             {ctaLabel}
           </Button>
         </nav>
