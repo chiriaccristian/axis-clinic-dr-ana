@@ -61,9 +61,9 @@ jobs:
           docker push "$IMAGE"
           echo "IMAGE=$IMAGE" >> "$GITHUB_ENV"
 
-      # Database and file storage, once deploy/cloud-run/README.md
-      # ("Database and medical files") has been run for this project.
-      - name: Data configuration
+      # Database, file storage, email and login settings, once the steps in
+      # deploy/cloud-run/README.md have been run for this project.
+      - name: Runtime configuration
         if: steps.config.outputs.ready == 'true'
         env:
           CLOUD_SQL_INSTANCE: ${{ vars.CLOUD_SQL_INSTANCE }}
@@ -71,23 +71,46 @@ jobs:
           DB_IAM_USER: ${{ vars.DB_IAM_USER }}
           MEDIA_BUCKET: ${{ vars.MEDIA_BUCKET }}
           RUNTIME_SA: ${{ vars.CLOUD_RUN_SERVICE_ACCOUNT }}
+          APP_URL: ${{ vars.APP_URL }}
+          MAIL_FROM: ${{ vars.MAIL_FROM }}
+          MAIL_FROM_NAME: ${{ vars.MAIL_FROM_NAME }}
+          BOOTSTRAP_ADMIN_USERNAME: ${{ vars.BOOTSTRAP_ADMIN_USERNAME }}
+          BOOTSTRAP_ADMIN_EMAIL: ${{ vars.BOOTSTRAP_ADMIN_EMAIL }}
         run: |
           FLAGS=""
           ENV_VARS=""
+          SECRETS=""
+          add_env() { [ -n "$2" ] && ENV_VARS="$ENV_VARS$1=$2"$'\n'; return 0; }
           if [ -n "$RUNTIME_SA" ]; then
             FLAGS="$FLAGS --service-account=$RUNTIME_SA"
           fi
           if [ -n "$CLOUD_SQL_INSTANCE" ]; then
             FLAGS="$FLAGS --add-cloudsql-instances=$CLOUD_SQL_INSTANCE"
-            ENV_VARS="CLOUD_SQL_INSTANCE=$CLOUD_SQL_INSTANCE,DB_NAME=$DB_NAME,DB_IAM_USER=$DB_IAM_USER"
+            add_env CLOUD_SQL_INSTANCE "$CLOUD_SQL_INSTANCE"
+            add_env DB_NAME "$DB_NAME"
+            add_env DB_IAM_USER "$DB_IAM_USER"
           fi
-          if [ -n "$MEDIA_BUCKET" ]; then
-            ENV_VARS="${ENV_VARS:+$ENV_VARS,}MEDIA_BUCKET=$MEDIA_BUCKET"
+          add_env MEDIA_BUCKET "$MEDIA_BUCKET"
+          add_env APP_URL "$APP_URL"
+          if [ -n "$MAIL_FROM" ]; then
+            add_env MAIL_FROM "$MAIL_FROM"
+            add_env MAIL_FROM_NAME "$MAIL_FROM_NAME"
+            SECRETS="${SECRETS}BREVO_API_KEY=brevo-api-key:latest"$'\n'
           fi
-          if [ -n "$ENV_VARS" ]; then
-            FLAGS="$FLAGS --update-env-vars=$ENV_VARS"
+          if [ -n "$BOOTSTRAP_ADMIN_USERNAME" ]; then
+            add_env BOOTSTRAP_ADMIN_USERNAME "$BOOTSTRAP_ADMIN_USERNAME"
+            add_env BOOTSTRAP_ADMIN_EMAIL "$BOOTSTRAP_ADMIN_EMAIL"
+            SECRETS="${SECRETS}BOOTSTRAP_ADMIN_PASSWORD=crm-bootstrap-admin-password:latest"$'\n'
           fi
-          echo "DATA_FLAGS=$FLAGS" >> "$GITHUB_ENV"
+          {
+            echo "DATA_FLAGS=$FLAGS"
+            echo "RUN_ENV_VARS<<EOF"
+            printf '%s' "$ENV_VARS"
+            echo "EOF"
+            echo "RUN_SECRETS<<EOF"
+            printf '%s' "$SECRETS"
+            echo "EOF"
+          } >> "$GITHUB_ENV"
 
       - name: Deploy to Cloud Run
         if: steps.config.outputs.ready == 'true'
@@ -96,4 +119,6 @@ jobs:
           service: ${{ env.SERVICE }}
           region: ${{ env.REGION }}
           image: ${{ env.IMAGE }}
+          env_vars: ${{ env.RUN_ENV_VARS }}
+          secrets: ${{ env.RUN_SECRETS }}
           flags: --port=8080 --min-instances=0 --max-instances=3 --memory=512Mi ${{ env.DATA_FLAGS }}

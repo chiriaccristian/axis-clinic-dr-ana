@@ -1,5 +1,11 @@
 import express from 'express';
 import { join } from 'node:path';
+import {
+  AuthService,
+  createAuthRouter,
+  createMailer,
+  errorHandler,
+} from '@org/api-auth';
 import { connectDb, readDbConfig } from '@org/api-data';
 import { ProductsService } from '@org/api-products';
 import {
@@ -13,10 +19,23 @@ const host = process.env.HOST ?? 'localhost';
 const port = process.env.PORT ? Number(process.env.PORT) : 3333;
 
 const app = express();
+// Cloud Run sits behind Google's front end; trust it for the client IP.
+app.set('trust proxy', 1);
+app.disable('x-powered-by');
 const productsService = new ProductsService();
 
 // Middleware
-app.use(express.json());
+app.use(express.json({ limit: '100kb' }));
+app.use((req, res, next) => {
+  res.header('X-Content-Type-Options', 'nosniff');
+  res.header('X-Frame-Options', 'DENY');
+  res.header('Referrer-Policy', 'no-referrer');
+  res.header(
+    'Strict-Transport-Security',
+    'max-age=31536000; includeSubDomains',
+  );
+  next();
+});
 
 // CORS configuration for React app
 app.use((req, res, next) => {
@@ -132,10 +151,32 @@ async function start() {
   if (dbConfig) {
     const connection = await connectDb(dbConfig);
     await connection.migrate(join(__dirname, 'migrations'));
+
+    const auth = new AuthService(connection.db);
+    await bootstrapSuperAdmin(auth);
+    app.use(
+      '/api',
+      createAuthRouter(auth, createMailer(process.env), {
+        appUrl: process.env.APP_URL ?? 'http://localhost:4200',
+        secureCookies: process.env.NODE_ENV === 'production',
+      }),
+    );
   }
+  app.use(errorHandler);
   app.listen(port, host, () => {
     console.log(`[ ready ] http://${host}:${port}`);
   });
+}
+
+/** Creates the first super admin from BOOTSTRAP_ADMIN_* if none exists yet. */
+async function bootstrapSuperAdmin(auth: AuthService) {
+  const username = process.env.BOOTSTRAP_ADMIN_USERNAME;
+  const email = process.env.BOOTSTRAP_ADMIN_EMAIL;
+  const password = process.env.BOOTSTRAP_ADMIN_PASSWORD;
+  if (!username || !email || !password) return;
+  if (await auth.bootstrapSuperAdmin({ username, email, password })) {
+    console.log('[ auth ] super admin created');
+  }
 }
 
 start().catch((err: unknown) => {
