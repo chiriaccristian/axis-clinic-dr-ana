@@ -8,6 +8,7 @@ import {
 } from '@org/api-auth';
 import { connectDb, readDbConfig } from '@org/api-data';
 import { ProductsService } from '@org/api-products';
+import { serveCrm } from './crm-static';
 import {
   ApiResponse,
   Product,
@@ -50,10 +51,6 @@ app.use((req, res, next) => {
   } else {
     next();
   }
-});
-
-app.get('/', (req, res) => {
-  res.send({ message: 'Hello API' });
 });
 
 // Products endpoints
@@ -161,6 +158,12 @@ async function start() {
         secureCookies: process.env.NODE_ENV === 'production',
       }),
     );
+  }
+  // In the container image the CRM build sits next to main.js.
+  if (!serveCrm(app, join(__dirname, 'crm'))) {
+    app.get('/', (req, res) => {
+      res.send({ message: 'Hello API' });
+    });
   }
   app.use(errorHandler);
   app.listen(port, host, () => {

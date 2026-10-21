@@ -1,0 +1,11 @@
+{
+  "name": "@org/crm",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "tags": [
+      "scope:crm",
+      "type:app"
+    ]
+  }
+}

@@ -7,19 +7,16 @@ import {
   ValidationError,
   type Db,
 } from '@org/api-data';
+import { USERNAME_PATTERN, type SessionUser } from '@org/models';
 import { and, asc, eq, gt, isNull, sql } from 'drizzle-orm';
 import { hashPassword, MIN_PASSWORD_LENGTH, verifyPassword } from './password';
 import { hashToken, newToken } from './tokens';
 
 export type Role = (typeof users.$inferSelect)['role'];
 
-/** The logged-in user, as attached to each authenticated request. */
-export interface SessionUser {
-  id: string;
-  tenantId: string | null;
-  role: Role;
-  username: string;
-}
+// The logged-in user is attached to each authenticated request; its shape is
+// shared with the CRM app.
+export type { SessionUser };
 
 export class InvalidCredentialsError extends Error {
   constructor() {
@@ -39,7 +36,6 @@ const SESSION_TTL_MS = 12 * 60 * 60 * 1000;
 const INVITATION_TTL_MS = 7 * 24 * 60 * 60 * 1000;
 const MAX_FAILED_LOGINS = 5;
 const LOCK_MS = 15 * 60 * 1000;
-const USERNAME_PATTERN = /^[a-z0-9._-]{3,32}$/;
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // Verified when the username does not exist, so both paths take similar time.
