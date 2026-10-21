@@ -1,0 +1,71 @@
+name: Deploy API to Cloud Run
+
+# develop -> GitHub environment "test" (crm-test.drana.ro)
+# main    -> GitHub environment "production" (crm.drana.ro)
+# Each environment holds the variables of its own Google Cloud project.
+# Setup steps: deploy/cloud-run/README.md
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: deploy-cloud-run-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ github.ref_name == 'main' && 'production' || 'test' }}
+    env:
+      PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+      REGION: ${{ vars.GCP_REGION || 'europe-west1' }}
+      SERVICE: ${{ vars.CLOUD_RUN_SERVICE || 'api' }}
+    steps:
+      - name: Check configuration
+        id: config
+        run: |
+          if [ -z "$PROJECT_ID" ] || [ -z "${{ vars.GCP_WIF_PROVIDER }}" ] || [ -z "${{ vars.GCP_SERVICE_ACCOUNT }}" ]; then
+            echo "::notice::Google Cloud is not configured for this environment yet. Skipping deploy."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.config.outputs.ready == 'true'
+
+      - name: Authenticate to Google Cloud
+        if: steps.config.outputs.ready == 'true'
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          service_account: ${{ vars.GCP_SERVICE_ACCOUNT }}
+
+      - uses: google-github-actions/setup-gcloud@v2
+        if: steps.config.outputs.ready == 'true'
+
+      - name: Build and push image
+        if: steps.config.outputs.ready == 'true'
+        run: |
+          IMAGE="$REGION-docker.pkg.dev/$PROJECT_ID/api/$SERVICE:$GITHUB_SHA"
+          gcloud auth configure-docker "$REGION-docker.pkg.dev" --quiet
+          docker build -f deploy/cloud-run/Dockerfile -t "$IMAGE" .
+          docker push "$IMAGE"
+          echo "IMAGE=$IMAGE" >> "$GITHUB_ENV"
+
+      - name: Deploy to Cloud Run
+        if: steps.config.outputs.ready == 'true'
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          service: ${{ env.SERVICE }}
+          region: ${{ env.REGION }}
+          image: ${{ env.IMAGE }}
+          flags: --port=8080 --min-instances=0 --max-instances=3 --memory=512Mi
