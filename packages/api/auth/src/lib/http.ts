@@ -78,11 +78,9 @@ export function rateLimit(max: number, windowMs: number): RequestHandler {
     }
     entry.count += 1;
     if (entry.count > max) {
-      res
-        .status(429)
-        .json({
-          error: { code: 'too_many_requests', message: 'Too many requests' },
-        });
+      res.status(429).json({
+        error: { code: 'too_many_requests', message: 'Too many requests' },
+      });
       return;
     }
     next();
@@ -98,22 +96,18 @@ export function createAuthMiddleware(
   const requireAuth: RequestHandler = (req, res, next) => {
     const token = readCookie(req, cookieName);
     if (!token) {
-      res
-        .status(401)
-        .json({
-          error: { code: 'unauthenticated', message: 'Login required' },
-        });
+      res.status(401).json({
+        error: { code: 'unauthenticated', message: 'Login required' },
+      });
       return;
     }
     auth
       .authenticate(token)
       .then((user) => {
         if (!user) {
-          res
-            .status(401)
-            .json({
-              error: { code: 'unauthenticated', message: 'Login required' },
-            });
+          res.status(401).json({
+            error: { code: 'unauthenticated', message: 'Login required' },
+          });
           return;
         }
         res.locals['user'] = user;
@@ -286,24 +280,20 @@ export const errorHandler: ErrorRequestHandler = (
   next: NextFunction,
 ) => {
   if (err instanceof InvalidCredentialsError) {
-    res
-      .status(401)
-      .json({
-        error: {
-          code: 'invalid_credentials',
-          message: 'Invalid username or password',
-        },
-      });
+    res.status(401).json({
+      error: {
+        code: 'invalid_credentials',
+        message: 'Invalid username or password',
+      },
+    });
   } else if (err instanceof ForbiddenError) {
     res
       .status(403)
       .json({ error: { code: 'forbidden', message: 'Not allowed' } });
   } else if (err instanceof NotFoundError) {
-    res
-      .status(404)
-      .json({
-        error: { code: 'not_found', message: `${err.entity} not found` },
-      });
+    res.status(404).json({
+      error: { code: 'not_found', message: `${err.entity} not found` },
+    });
   } else if (err instanceof ValidationError) {
     res
       .status(400)

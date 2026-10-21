@@ -86,12 +86,8 @@
           "name": "audit_log_tenant_id_tenants_id_fk",
           "tableFrom": "audit_log",
           "tableTo": "tenants",
-          "columnsFrom": [
-            "tenant_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["tenant_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -192,12 +188,8 @@
           "name": "consent_templates_tenant_id_tenants_id_fk",
           "tableFrom": "consent_templates",
           "tableTo": "tenants",
-          "columnsFrom": [
-            "tenant_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["tenant_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -299,12 +291,8 @@
           "name": "consents_tenant_id_tenants_id_fk",
           "tableFrom": "consents",
           "tableTo": "tenants",
-          "columnsFrom": [
-            "tenant_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["tenant_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -312,12 +300,8 @@
           "name": "consents_patient_id_patients_id_fk",
           "tableFrom": "consents",
           "tableTo": "patients",
-          "columnsFrom": [
-            "patient_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["patient_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -325,12 +309,8 @@
           "name": "consents_template_id_consent_templates_id_fk",
           "tableFrom": "consents",
           "tableTo": "consent_templates",
-          "columnsFrom": [
-            "template_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["template_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -409,12 +389,8 @@
           "name": "invitations_tenant_id_tenants_id_fk",
           "tableFrom": "invitations",
           "tableTo": "tenants",
-          "columnsFrom": [
-            "tenant_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["tenant_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -422,12 +398,8 @@
           "name": "invitations_invited_by_users_id_fk",
           "tableFrom": "invitations",
           "tableTo": "users",
-          "columnsFrom": [
-            "invited_by"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["invited_by"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -437,9 +409,7 @@
         "invitations_token_hash_unique": {
           "name": "invitations_token_hash_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "token_hash"
-          ]
+          "columns": ["token_hash"]
         }
       },
       "policies": {},
@@ -573,12 +543,8 @@
           "name": "media_files_tenant_id_tenants_id_fk",
           "tableFrom": "media_files",
           "tableTo": "tenants",
-          "columnsFrom": [
-            "tenant_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["tenant_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -586,12 +552,8 @@
           "name": "media_files_patient_id_patients_id_fk",
           "tableFrom": "media_files",
           "tableTo": "patients",
-          "columnsFrom": [
-            "patient_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["patient_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -601,9 +563,7 @@
         "media_files_object_key_unique": {
           "name": "media_files_object_key_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "object_key"
-          ]
+          "columns": ["object_key"]
         }
       },
       "policies": {},
@@ -706,12 +666,8 @@
           "name": "patients_tenant_id_tenants_id_fk",
           "tableFrom": "patients",
           "tableTo": "tenants",
-          "columnsFrom": [
-            "tenant_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["tenant_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -774,12 +730,8 @@
           "name": "sessions_user_id_users_id_fk",
           "tableFrom": "sessions",
           "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -922,12 +874,8 @@
           "name": "users_tenant_id_tenants_id_fk",
           "tableFrom": "users",
           "tableTo": "tenants",
-          "columnsFrom": [
-            "tenant_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["tenant_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -937,16 +885,12 @@
         "users_email_unique": {
           "name": "users_email_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "email"
-          ]
+          "columns": ["email"]
         },
         "users_username_unique": {
           "name": "users_username_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "username"
-          ]
+          "columns": ["username"]
         }
       },
       "policies": {},
@@ -963,65 +907,37 @@
     "public.consent_kind": {
       "name": "consent_kind",
       "schema": "public",
-      "values": [
-        "treatment",
-        "data_processing",
-        "photo_use",
-        "marketing"
-      ]
+      "values": ["treatment", "data_processing", "photo_use", "marketing"]
     },
     "public.consent_method": {
       "name": "consent_method",
       "schema": "public",
-      "values": [
-        "tablet_signature",
-        "paper_scan",
-        "online"
-      ]
+      "values": ["tablet_signature", "paper_scan", "online"]
     },
     "public.consent_status": {
       "name": "consent_status",
       "schema": "public",
-      "values": [
-        "granted",
-        "withdrawn"
-      ]
+      "values": ["granted", "withdrawn"]
     },
     "public.media_kind": {
       "name": "media_kind",
       "schema": "public",
-      "values": [
-        "progress_photo",
-        "xray",
-        "consent_document",
-        "other"
-      ]
+      "values": ["progress_photo", "xray", "consent_document", "other"]
     },
     "public.media_status": {
       "name": "media_status",
       "schema": "public",
-      "values": [
-        "pending",
-        "uploaded",
-        "deleted"
-      ]
+      "values": ["pending", "uploaded", "deleted"]
     },
     "public.user_role": {
       "name": "user_role",
       "schema": "public",
-      "values": [
-        "super_admin",
-        "manager",
-        "doctor"
-      ]
+      "values": ["super_admin", "manager", "doctor"]
     },
     "public.user_status": {
       "name": "user_status",
       "schema": "public",
-      "values": [
-        "active",
-        "disabled"
-      ]
+      "values": ["active", "disabled"]
     }
   },
   "schemas": {},
