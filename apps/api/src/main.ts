@@ -9,6 +9,7 @@ import {
 import { connectDb, readDbConfig } from '@org/api-data';
 import { ProductsService } from '@org/api-products';
 import { serveCrm } from './crm-static';
+import { describeError } from './describe-error';
 import {
   ApiResponse,
   Product,
@@ -183,9 +184,6 @@ async function bootstrapSuperAdmin(auth: AuthService) {
 }
 
 start().catch((err: unknown) => {
-  console.error(
-    '[ error ] API failed to start',
-    err instanceof Error ? err.message : err,
-  );
+  console.error('[ error ] API failed to start:', describeError(err));
   process.exit(1);
 });
