@@ -6,6 +6,7 @@ import { useState, type FormEvent } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { AuthLayout, FormError } from './auth-layout';
 import { errorCode } from './error-code';
+import { safeRedirectPath } from './safe-redirect';
 
 export function LoginPage() {
   const { state, login } = useSession();
@@ -15,13 +16,13 @@ export function LoginPage() {
   const [submitting, setSubmitting] = useState(false);
 
   // Where the user was going before being sent to login.
-  const from =
+  const from = safeRedirectPath(
     typeof location.state === 'object' &&
-    location.state !== null &&
-    'from' in location.state &&
-    typeof location.state.from === 'string'
+      location.state !== null &&
+      'from' in location.state
       ? location.state.from
-      : '/';
+      : undefined,
+  );
 
   if (state.status === 'authenticated') return <Navigate to={from} replace />;
 
