@@ -65,6 +65,39 @@ npm exec nx graph
 
 > This workspace requires Node.js `>=24.0.0`.
 
+## 🌐 Run the public site locally
+
+The public site (`apps/clinic`) is a static React app. It needs no database
+and no API, so you can start it on its own.
+
+1. **Prerequisites:** Node.js 24 or newer.
+2. **Install dependencies** (once, or after `package.json` changes):
+
+   ```bash
+   npm ci
+   ```
+
+3. **Start the dev server:**
+
+   ```bash
+   npx nx serve @org/clinic
+   ```
+
+   Open http://localhost:4200. Changes reload in the browser as you save. Most
+   of the site's text and images are configured in
+   `apps/clinic/src/content/site-content.ts`.
+
+4. **Check the production build** (optional, this is what gets uploaded to
+   cPanel):
+
+   ```bash
+   npx nx build @org/clinic     # output in apps/clinic/dist, pages prerendered
+   npx nx preview @org/clinic   # serves the build on http://localhost:4200
+   ```
+
+If port 4200 is already in use, stop the other process or run
+`npx nx serve @org/clinic --port 4201`.
+
 ## 💻 Run the CRM locally
 
 The CRM needs three things running: PostgreSQL, the API (`apps/api`, port 3333)
@@ -151,7 +184,7 @@ managers and doctors into it.
 - To start over with an empty database:
   `dropdb -p 5433 crm && createdb -p 5433 crm`.
 
-The public site runs separately: `npx nx serve @org/clinic` (port 4200).
+You can run the public site at the same time (see above); it uses port 4200.
 
 ## 🌐 Deployment (cPanel)
 
