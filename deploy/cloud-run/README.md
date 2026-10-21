@@ -225,15 +225,38 @@ link, to send by hand.
 
 ## After the first deploy
 
-The service starts private. To let the public site call it:
+The image also contains the CRM app (`apps/crm`), served by the API on the
+same origin: `/` shows the app, `/api/*` is the API. The service starts
+private; once it has login (above), make it reachable from browsers:
 
 ```bash
 gcloud run services add-iam-policy-binding api --region="$REGION" \
   --member=allUsers --role=roles/run.invoker
 ```
 
-Keep the test service private until it has its own login.
+Every API route still checks the session, role and practice.
 
-Custom domains: Cloud Run domain mapping is still Preview. Use Firebase
-Hosting in the same project (rewrite `/api/**` to the `api` service) to serve
-`crm-test.drana.ro` and `crm.drana.ro`.
+### Custom domain
+
+Use a Cloud Run domain mapping. Firebase Hosting is not an option: it drops
+every cookie except `__session`, so the login cookie would never arrive.
+
+1. Verify the domain once per Google account (adds a TXT record at `drana.ro`):
+
+   ```bash
+   gcloud domains verify drana.ro
+   ```
+
+2. Map the subdomain and add the CNAME it prints
+   (`crm-test` → `ghs.googlehosted.com.`) at the DNS provider:
+
+   ```bash
+   gcloud beta run domain-mappings create --service=api \
+     --domain=crm-test.drana.ro --region="$REGION"
+   ```
+
+   The HTTPS certificate is issued automatically, usually within an hour.
+
+Domain mapping is a Preview feature with some extra latency; before
+production, consider a global external Application Load Balancer instead.
+`APP_URL` must match the domain, since invitation emails link to it.

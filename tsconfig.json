@@ -26,6 +26,21 @@
     },
     {
       "path": "./packages/api/auth"
+    },
+    {
+      "path": "./apps/crm"
+    },
+    {
+      "path": "./libs/crm/util-i18n"
+    },
+    {
+      "path": "./libs/crm/data-access-auth"
+    },
+    {
+      "path": "./libs/crm/feature-auth"
+    },
+    {
+      "path": "./libs/crm/feature-users"
     }
   ]
 }

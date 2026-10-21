@@ -83,6 +83,7 @@
     "apps/*",
     "packages/api/*",
     "packages/shared/*",
-    "libs/*"
+    "libs/*",
+    "libs/crm/*"
   ]
 }
