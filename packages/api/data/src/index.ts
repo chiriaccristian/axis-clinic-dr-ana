@@ -1,4 +1,5 @@
 export * from './lib/schema';
+export * as schema from './lib/schema';
 export { connectDb, readDbConfig } from './lib/db';
 export type { Db, DbConfig, DbConnection, Schema } from './lib/db';
 export { NotFoundError, ValidationError } from './lib/errors';

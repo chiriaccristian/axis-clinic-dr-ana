@@ -131,6 +131,7 @@
     "express": "^4.21.2",
     "@org/api-products": "*",
     "@org/models": "*",
-    "@org/api-data": "*"
+    "@org/api-data": "*",
+    "@org/api-auth": "*"
   }
 }

@@ -23,6 +23,9 @@
     },
     {
       "path": "./packages/api/data"
+    },
+    {
+      "path": "./packages/api/auth"
     }
   ]
 }

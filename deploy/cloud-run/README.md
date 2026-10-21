@@ -171,6 +171,58 @@ Admin → Audit Logs → enable _Data Read_ and _Data Write_ for **Cloud SQL** a
 Encryption: both services encrypt at rest by default and the API connects
 over TLS. Customer-managed keys (Cloud KMS) can be added for production later.
 
+## Login and email
+
+The API has three roles: `super_admin` (runs the platform, sees every
+practice), `manager` (everything in their practice) and `doctor`. People log
+in with a username and password; new accounts are created from an email
+invitation. Invitation emails go through [Brevo](https://www.brevo.com) (EU).
+
+**Brevo (once):** create an account, then Senders, Domains & Dedicated IPs →
+Domains → add `drana.ro` and add the DNS records it shows (cPanel → Zone
+Editor). Then SMTP & API → API keys → generate a key.
+
+Run in Cloud Shell, per project. `read -s` keeps the values out of the screen
+and the shell history.
+
+```bash
+PROJECT_ID=crm-ultra-clinic-test
+RUNTIME_SA="api-runtime@$PROJECT_ID.iam.gserviceaccount.com"
+gcloud config set project "$PROJECT_ID"
+
+read -rs -p "Brevo API key: " BREVO_KEY; echo
+printf '%s' "$BREVO_KEY" | gcloud secrets create brevo-api-key \
+  --replication-policy=user-managed --locations=europe-west1 --data-file=-
+
+# Password of the first super admin (at least 10 characters).
+read -rs -p "Super admin password: " ADMIN_PASSWORD; echo
+printf '%s' "$ADMIN_PASSWORD" | gcloud secrets create crm-bootstrap-admin-password \
+  --replication-policy=user-managed --locations=europe-west1 --data-file=-
+unset BREVO_KEY ADMIN_PASSWORD
+
+for SECRET in brevo-api-key crm-bootstrap-admin-password; do
+  gcloud secrets add-iam-policy-binding "$SECRET" \
+    --member="serviceAccount:$RUNTIME_SA" --role=roles/secretmanager.secretAccessor
+done
+```
+
+Then add these **variables** to the GitHub environment:
+
+| Variable                   | Example                     |
+| -------------------------- | --------------------------- |
+| `APP_URL`                  | `https://crm-test.drana.ro` |
+| `MAIL_FROM`                | `no-reply@drana.ro`         |
+| `MAIL_FROM_NAME`           | `Dr. Ana`                   |
+| `BOOTSTRAP_ADMIN_USERNAME` | your username               |
+| `BOOTSTRAP_ADMIN_EMAIL`    | your email                  |
+
+On the next deploy the API creates the super admin (only if none exists yet).
+After your first login you can delete the two `BOOTSTRAP_ADMIN_*` variables
+and the `crm-bootstrap-admin-password` secret.
+
+Without `MAIL_FROM` nothing is emailed: the invitation response contains the
+link, to send by hand.
+
 ## After the first deploy
 
 The service starts private. To let the public site call it:

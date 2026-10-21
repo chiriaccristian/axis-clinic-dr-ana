@@ -10,6 +10,7 @@ COPY package.json package-lock.json ./
 COPY apps/api/package.json apps/api/
 COPY apps/clinic/package.json apps/clinic/
 COPY libs/ui/package.json libs/ui/
+COPY packages/api/auth/package.json packages/api/auth/
 COPY packages/api/data/package.json packages/api/data/
 COPY packages/api/products/package.json packages/api/products/
 COPY packages/shared/models/package.json packages/shared/models/
