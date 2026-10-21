@@ -1,4 +1,6 @@
 import express from 'express';
+import { join } from 'node:path';
+import { connectDb, readDbConfig } from '@org/api-data';
 import { ProductsService } from '@org/api-products';
 import {
   ApiResponse,
@@ -123,6 +125,23 @@ app.get('/api/products/:id', (req, res) => {
   }
 });
 
-app.listen(port, host, () => {
-  console.log(`[ ready ] http://${host}:${port}`);
+// The database is optional until every environment has one
+// (deploy/cloud-run/README.md, "Database and medical files").
+async function start() {
+  const dbConfig = readDbConfig(process.env);
+  if (dbConfig) {
+    const connection = await connectDb(dbConfig);
+    await connection.migrate(join(__dirname, 'migrations'));
+  }
+  app.listen(port, host, () => {
+    console.log(`[ ready ] http://${host}:${port}`);
+  });
+}
+
+start().catch((err: unknown) => {
+  console.error(
+    '[ error ] API failed to start',
+    err instanceof Error ? err.message : err,
+  );
+  process.exit(1);
 });
