@@ -61,6 +61,34 @@ jobs:
           docker push "$IMAGE"
           echo "IMAGE=$IMAGE" >> "$GITHUB_ENV"
 
+      # Database and file storage, once deploy/cloud-run/README.md
+      # ("Database and medical files") has been run for this project.
+      - name: Data configuration
+        if: steps.config.outputs.ready == 'true'
+        env:
+          CLOUD_SQL_INSTANCE: ${{ vars.CLOUD_SQL_INSTANCE }}
+          DB_NAME: ${{ vars.DB_NAME }}
+          DB_IAM_USER: ${{ vars.DB_IAM_USER }}
+          MEDIA_BUCKET: ${{ vars.MEDIA_BUCKET }}
+          RUNTIME_SA: ${{ vars.CLOUD_RUN_SERVICE_ACCOUNT }}
+        run: |
+          FLAGS=""
+          ENV_VARS=""
+          if [ -n "$RUNTIME_SA" ]; then
+            FLAGS="$FLAGS --service-account=$RUNTIME_SA"
+          fi
+          if [ -n "$CLOUD_SQL_INSTANCE" ]; then
+            FLAGS="$FLAGS --add-cloudsql-instances=$CLOUD_SQL_INSTANCE"
+            ENV_VARS="CLOUD_SQL_INSTANCE=$CLOUD_SQL_INSTANCE,DB_NAME=$DB_NAME,DB_IAM_USER=$DB_IAM_USER"
+          fi
+          if [ -n "$MEDIA_BUCKET" ]; then
+            ENV_VARS="${ENV_VARS:+$ENV_VARS,}MEDIA_BUCKET=$MEDIA_BUCKET"
+          fi
+          if [ -n "$ENV_VARS" ]; then
+            FLAGS="$FLAGS --update-env-vars=$ENV_VARS"
+          fi
+          echo "DATA_FLAGS=$FLAGS" >> "$GITHUB_ENV"
+
       - name: Deploy to Cloud Run
         if: steps.config.outputs.ready == 'true'
         uses: google-github-actions/deploy-cloudrun@v2
@@ -68,4 +96,4 @@ jobs:
           service: ${{ env.SERVICE }}
           region: ${{ env.REGION }}
           image: ${{ env.IMAGE }}
-          flags: --port=8080 --min-instances=0 --max-instances=3 --memory=512Mi
+          flags: --port=8080 --min-instances=0 --max-instances=3 --memory=512Mi ${{ env.DATA_FLAGS }}
