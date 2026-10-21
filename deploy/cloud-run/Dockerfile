@@ -10,6 +10,7 @@ COPY package.json package-lock.json ./
 COPY apps/api/package.json apps/api/
 COPY apps/clinic/package.json apps/clinic/
 COPY libs/ui/package.json libs/ui/
+COPY packages/api/data/package.json packages/api/data/
 COPY packages/api/products/package.json packages/api/products/
 COPY packages/shared/models/package.json packages/shared/models/
 COPY packages/shared/test-utils/package.json packages/shared/test-utils/
@@ -21,6 +22,7 @@ FROM node:24-slim
 WORKDIR /app
 ENV NODE_ENV=production HOST=0.0.0.0 PORT=8080
 COPY --from=build /workspace/apps/api/dist/main.js ./main.js
+COPY --from=build /workspace/apps/api/dist/migrations ./migrations
 USER node
 EXPOSE 8080
 CMD ["node", "main.js"]

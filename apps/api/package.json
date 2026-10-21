@@ -21,7 +21,12 @@
           "main": "apps/api/src/main.ts",
           "tsConfig": "apps/api/tsconfig.app.json",
           "assets": [
-            "apps/api/src/assets"
+            "apps/api/src/assets",
+            {
+              "input": "packages/api/data/migrations",
+              "glob": "**/*",
+              "output": "migrations"
+            }
           ],
           "esbuildOptions": {
             "sourcemap": true,
@@ -125,6 +130,7 @@
   "dependencies": {
     "express": "^4.21.2",
     "@org/api-products": "*",
-    "@org/models": "*"
+    "@org/models": "*",
+    "@org/api-data": "*"
   }
 }
