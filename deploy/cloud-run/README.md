@@ -124,14 +124,16 @@ done
 DB_IAM_USER="api-runtime@$PROJECT_ID.iam"
 gcloud sql users create "$DB_IAM_USER" --instance="$INSTANCE" --type=cloud_iam_service_account
 
-# Let the API user own its tables. Cloud Shell opens psql; the password comes
-# from the variable above. If this step fails, run the same SQL in the console:
-# SQL -> crm-db -> Cloud SQL Studio, user postgres, database crm.
-PGPASSWORD="$POSTGRES_PASSWORD" gcloud sql connect "$INSTANCE" --user=postgres \
-  --database="$DATABASE" --quiet <<SQL
+# Let the API user own its tables. psql runs through the Cloud SQL Auth Proxy
+# (preinstalled in Cloud Shell); the admin password is read from Secret Manager.
+cloud-sql-proxy "$PROJECT_ID:$REGION:$INSTANCE" --port 9470 &
+sleep 5
+PGPASSWORD="$(gcloud secrets versions access latest --secret=crm-db-postgres-password)" \
+  psql "host=127.0.0.1 port=9470 user=postgres dbname=$DATABASE" <<SQL
 GRANT ALL ON DATABASE $DATABASE TO "$DB_IAM_USER";
 GRANT ALL ON SCHEMA public TO "$DB_IAM_USER";
 SQL
+kill %1
 
 # --- Cloud Storage for photos and X-rays ---
 gcloud storage buckets create "gs://$BUCKET" --location="$REGION" \
