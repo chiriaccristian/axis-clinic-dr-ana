@@ -1,5 +1,7 @@
+import { sql } from 'drizzle-orm';
 import {
   bigserial,
+  check,
   bigint,
   date,
   index,
@@ -162,5 +164,79 @@ export const auditLog = pgTable(
   },
   (t) => [
     index('audit_log_entity_idx').on(t.tenantId, t.entityType, t.entityId),
+  ],
+);
+
+export const userRole = pgEnum('user_role', [
+  'super_admin',
+  'manager',
+  'doctor',
+]);
+
+export const userStatus = pgEnum('user_status', ['active', 'disabled']);
+
+/**
+ * People who log in to the CRM. A super admin runs the platform and has no
+ * tenant; managers and doctors belong to exactly one practice.
+ */
+export const users = pgTable(
+  'users',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    tenantId: uuid('tenant_id').references(() => tenants.id),
+    role: userRole('role').notNull(),
+    /** Stored lowercase. */
+    email: text('email').notNull().unique(),
+    /** Stored lowercase; used to log in. */
+    username: text('username').notNull().unique(),
+    passwordHash: text('password_hash').notNull(),
+    status: userStatus('status').notNull().default('active'),
+    failedLogins: integer('failed_logins').notNull().default(0),
+    lockedUntil: timestamp('locked_until', { withTimezone: true }),
+    lastLoginAt: timestamp('last_login_at', { withTimezone: true }),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    index('users_tenant_idx').on(t.tenantId),
+    check(
+      'users_tenant_matches_role',
+      sql`(${t.role} = 'super_admin') = (${t.tenantId} is null)`,
+    ),
+  ],
+);
+
+/** Login sessions. Only a SHA-256 of the cookie token is stored. */
+export const sessions = pgTable(
+  'sessions',
+  {
+    tokenHash: text('token_hash').primaryKey(),
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    createdAt: createdAt(),
+    expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
+  },
+  (t) => [index('sessions_user_idx').on(t.userId)],
+);
+
+/** Single-use account invitations sent by email. */
+export const invitations = pgTable(
+  'invitations',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    tokenHash: text('token_hash').notNull().unique(),
+    tenantId: uuid('tenant_id').references(() => tenants.id),
+    role: userRole('role').notNull(),
+    email: text('email').notNull(),
+    invitedBy: uuid('invited_by').references(() => users.id),
+    createdAt: createdAt(),
+    expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
+    acceptedAt: timestamp('accepted_at', { withTimezone: true }),
+  },
+  (t) => [
+    check(
+      'invitations_tenant_matches_role',
+      sql`(${t.role} = 'super_admin') = (${t.tenantId} is null)`,
+    ),
   ],
 );
