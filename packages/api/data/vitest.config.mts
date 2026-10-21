@@ -8,6 +8,9 @@ export default defineConfig(() => ({
     watch: false,
     globals: true,
     environment: 'node',
+    // Each suite boots an in-memory Postgres (PGlite), which takes several
+    // seconds and longer when Nx runs other tasks in parallel.
+    hookTimeout: 60_000,
     include: ['{src,tests}/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     reporters: ['default'],
     coverage: {
