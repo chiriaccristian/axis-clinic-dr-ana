@@ -3,6 +3,7 @@
 <a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
 
 ✨ A repository showcasing key [Nx](https://nx.dev) features for React monorepos ✨
+
 ## Finish your Nx platform setup
 
 🚀 [Finish setting up your workspace](https://cloud.nx.app/connect/CqHpkOWlwR) to get faster builds with remote caching, distributed task execution, and self-healing CI. [Learn more about Nx Cloud](https://nx.dev/ci/intro/why-nx-cloud).
@@ -14,7 +15,8 @@ This repository demonstrates a production-ready React monorepo with:
 - **2 Applications**
 
   - `clinic` - React application for the new clinic landing experience
-  - `api` - Backend API serving product data
+  - `crm` - React CRM app (login, invitations, users and practices)
+  - `api` - Backend API (auth, database, file storage); also serves the built CRM
 
 - **3 Libraries**
 
@@ -63,6 +65,94 @@ npm exec nx graph
 
 > This workspace requires Node.js `>=24.0.0`.
 
+## 💻 Run the CRM locally
+
+The CRM needs three things running: PostgreSQL, the API (`apps/api`, port 3333)
+and the CRM app (`apps/crm`, port 4300). The CRM dev server proxies `/api` to
+the API, so the session cookie works as it does in production.
+
+### 1. Prerequisites
+
+- Node.js 24 (`nvm use 24`)
+- PostgreSQL 17 or 18. Any local install works. On macOS the simplest is
+  [Postgres.app](https://postgresapp.com): create a server on port **5433**
+  (keeps port 5432 free for other projects) and press **Initialize**.
+
+### 2. Install dependencies
+
+```bash
+git checkout develop && git pull
+npm ci
+```
+
+### 3. Create the database
+
+```bash
+# Postgres.app (use the version you installed: 17 or 18)
+/Applications/Postgres.app/Contents/Versions/18/bin/createdb -p 5433 crm
+
+# Any other install with createdb on the PATH
+createdb -p 5433 crm
+```
+
+### 4. Configure the API
+
+Copy `apps/api/.env.example` to `apps/api/.env` (git-ignored) and set at least:
+
+```dotenv
+HOST=localhost
+PORT=3333
+DATABASE_URL=postgres://localhost:5433/crm
+APP_URL=http://localhost:4300
+
+# First super admin, created at startup only if none exists yet.
+# Local, fictional values only.
+BOOTSTRAP_ADMIN_USERNAME=admin.local
+BOOTSTRAP_ADMIN_EMAIL=admin@example.test
+BOOTSTRAP_ADMIN_PASSWORD=parola-locala-123
+```
+
+If your PostgreSQL requires a password, use
+`postgres://USER:PASSWORD@localhost:5433/crm`. Leave the Brevo variables unset
+locally: invitations are not emailed, and the CRM shows the invitation link on
+screen instead.
+
+### 5. Start the API and the CRM
+
+In two terminals:
+
+```bash
+npx nx serve @org/api   # http://localhost:3333
+npx nx serve @org/crm   # http://localhost:4300
+```
+
+On the first start the API applies the database migrations and logs:
+
+```
+[ auth ] super admin created
+[ ready ] http://localhost:3333
+```
+
+Open <http://localhost:4300> and log in with the bootstrap username and
+password. Go to **Utilizatori → Clinici** to create a practice, then invite
+managers and doctors into it.
+
+### Troubleshooting
+
+- **`API failed to start: Failed query: CREATE SCHEMA ... <- ECONNREFUSED`:**
+  PostgreSQL is not running, or not on the port in `DATABASE_URL`.
+- **`... password authentication failed`:** the user or password in
+  `DATABASE_URL` is wrong.
+- **`... database "crm" does not exist`:** run step 3.
+- **Port already in use:** another PostgreSQL (for example in Docker) holds
+  the port; pick a free one and update `DATABASE_URL`.
+- **No `super admin created` line:** an admin already exists in this database.
+  It is only created once.
+- To start over with an empty database:
+  `dropdb -p 5433 crm && createdb -p 5433 crm`.
+
+The public site runs separately: `npx nx serve @org/clinic` (port 4200).
+
 ## 🌐 Deployment (cPanel)
 
 This repository is configured for automatic deployment to cPanel using GitHub Actions.
@@ -70,24 +160,24 @@ This repository is configured for automatic deployment to cPanel using GitHub Ac
 ### Setup instructions:
 
 1.  **Create FTP credentials in cPanel**:
-    *   Log in to cPanel.
-    *   Go to **FTP Accounts**.
-    *   Create a new account or use an existing one.
-    *   Note the **FTP Server**, **Username** and **Password**.
+    - Log in to cPanel.
+    - Go to **FTP Accounts**.
+    - Create a new account or use an existing one.
+    - Note the **FTP Server**, **Username** and **Password**.
 
 2.  **Add "Secrets" in GitHub**:
-    *   Go to your repository on GitHub.
-    *   Navigate to **Settings** > **Secrets and variables** > **Actions**.
-    *   Add the following **Repository secrets**:
-        *   `FTP_SERVER`: Your server address (e.g. `ftp.yourdomain.com`).
-        *   `FTP_USERNAME`: The FTP user (e.g. `user@yourdomain.com`).
-        *   `FTP_PASSWORD`: The FTP account password.
+    - Go to your repository on GitHub.
+    - Navigate to **Settings** > **Secrets and variables** > **Actions**.
+    - Add the following **Repository secrets**:
+      - `FTP_SERVER`: Your server address (e.g. `ftp.yourdomain.com`).
+      - `FTP_USERNAME`: The FTP user (e.g. `user@yourdomain.com`).
+      - `FTP_PASSWORD`: The FTP account password.
 
 3.  **Automatic deployment**:
-    *   On every `push` or `merge` to the `main` branch, the `.github/workflows/deploy.yml` workflow will:
-        1.  Install dependencies.
-        2.  Build the `@org/clinic` application.
-        3.  Upload the contents of the `apps/clinic/dist` folder to the `public_html/` folder on your server.
+    - On every `push` or `merge` to the `main` branch, the `.github/workflows/deploy.yml` workflow will:
+      1.  Install dependencies.
+      2.  Build the `@org/clinic` application.
+      3.  Upload the contents of the `apps/clinic/dist` folder to the `public_html/` folder on your server.
 
 > **Note**: The `.htaccess` file in `apps/clinic/public` is automatically included in the build to handle React (Single Page Application) routing on the Apache server in cPanel.
 
