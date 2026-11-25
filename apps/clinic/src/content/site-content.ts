@@ -21,7 +21,14 @@ export function priceFrom(procedure: Procedure): string | undefined {
   }
 
   const amounts = procedure.pricing
-    .map((price) => Number(price.value.replace(/[^\d,.]/g, '').replace(/\./g, '').replace(',', '.')))
+    .map((price) =>
+      Number(
+        price.value
+          .replace(/[^\d,.]/g, '')
+          .replace(/\./g, '')
+          .replace(',', '.'),
+      ),
+    )
     .filter((amount) => Number.isFinite(amount) && amount > 0);
 
   if (!amounts.length) {
@@ -58,13 +65,36 @@ export const brand = {
   address: 'Strada Cosminului nr. 13',
   mapsHref:
     'https://www.google.com/maps/search/?api=1&query=Dental%20One%20Studio%2C%20Strada%20Cosminului%20nr.%2013',
-  instagram: 'https://www.instagram.com/facial_harmony_by_dr_ana?igsh=MWwxNmFqbzF6ZnFqcw%3D%3D&utm_source=qr',
+  instagram:
+    'https://www.instagram.com/facial_harmony_by_dr_ana?igsh=MWwxNmFqbzF6ZnFqcw%3D%3D&utm_source=qr',
   facebook: 'https://www.facebook.com/share/1F8ECLDVkN/?mibextid=wwXIfr',
 };
 
 export function whatsappHref(message: string) {
   return `https://wa.me/${brand.whatsapp}?text=${encodeURIComponent(message)}`;
 }
+
+/**
+ * Seasonal promotion shown in an auto-opening modal, once per browser session.
+ * After `endsAt` the modal is no longer shown; replace or remove this entry for
+ * the next campaign (changing `id` also resets who has already seen it).
+ */
+export const promo = {
+  id: 'oferte-decembrie-2026',
+  /** Last moment the promo is shown (Europe/Bucharest, EET = UTC+2). */
+  endsAt: '2026-12-31T23:59:59+02:00',
+  dialogLabel: 'Ofertele lunii decembrie',
+  image: {
+    base: '/oferte-decembrie',
+    width: 1024,
+    height: 1024,
+    alt: 'Ofertele lunii decembrie la Facial Harmony by Dr. Ana: First Glow, o ședință de biorevitalizare facială, 349 lei; Natural Lips, augmentare buze cu acid hialuronic până la 1 ml, 990 lei; Soft Expression, tratament cu toxină botulinică pe 3 zone, 999 lei; Skin Renewal, 3 ședințe de biorevitalizare facială, 990 lei. Pachete valabile în luna decembrie.',
+  },
+  ctaLabel: 'Programează-te pe WhatsApp',
+  ctaHint: 'Ai întrebări? Scrie-ne pe WhatsApp.',
+  whatsappMessage:
+    'Bună ziua! Am văzut ofertele lunii decembrie și aș dori să fac o programare / să pun câteva întrebări.',
+};
 
 export const navLinks = [
   { id: 'despre', label: 'Despre Dr. Ana' },
