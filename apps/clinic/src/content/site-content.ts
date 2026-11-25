@@ -21,7 +21,14 @@ export function priceFrom(procedure: Procedure): string | undefined {
   }
 
   const amounts = procedure.pricing
-    .map((price) => Number(price.value.replace(/[^\d,.]/g, '').replace(/\./g, '').replace(',', '.')))
+    .map((price) =>
+      Number(
+        price.value
+          .replace(/[^\d,.]/g, '')
+          .replace(/\./g, '')
+          .replace(',', '.'),
+      ),
+    )
     .filter((amount) => Number.isFinite(amount) && amount > 0);
 
   if (!amounts.length) {
@@ -58,7 +65,8 @@ export const brand = {
   address: 'Strada Cosminului nr. 13',
   mapsHref:
     'https://www.google.com/maps/search/?api=1&query=Dental%20One%20Studio%2C%20Strada%20Cosminului%20nr.%2013',
-  instagram: 'https://www.instagram.com/facial_harmony_by_dr_ana?igsh=MWwxNmFqbzF6ZnFqcw%3D%3D&utm_source=qr',
+  instagram:
+    'https://www.instagram.com/facial_harmony_by_dr_ana?igsh=MWwxNmFqbzF6ZnFqcw%3D%3D&utm_source=qr',
   facebook: 'https://www.facebook.com/share/1F8ECLDVkN/?mibextid=wwXIfr',
 };
 

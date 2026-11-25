@@ -21,7 +21,10 @@ interface StoredConsent extends ConsentChoice {
 type ConsentSignal = 'granted' | 'denied';
 
 function loadGoogleAnalytics() {
-  if (typeof window === 'undefined' || document.getElementById(GOOGLE_ANALYTICS_SCRIPT_ID)) {
+  if (
+    typeof window === 'undefined' ||
+    document.getElementById(GOOGLE_ANALYTICS_SCRIPT_ID)
+  ) {
     return;
   }
 
@@ -30,7 +33,8 @@ function loadGoogleAnalytics() {
     gtag?: (...args: unknown[]) => void;
   };
   scope.dataLayer = scope.dataLayer ?? [];
-  scope.gtag = scope.gtag ?? ((...args: unknown[]) => scope.dataLayer?.push(args));
+  scope.gtag =
+    scope.gtag ?? ((...args: unknown[]) => scope.dataLayer?.push(args));
   scope.gtag('js', new Date());
   scope.gtag('config', GOOGLE_ANALYTICS_ID);
 
@@ -42,7 +46,8 @@ function loadGoogleAnalytics() {
 }
 
 function pushConsent({ analytics, marketing }: ConsentChoice) {
-  const granted = (value: boolean): ConsentSignal => (value ? 'granted' : 'denied');
+  const granted = (value: boolean): ConsentSignal =>
+    value ? 'granted' : 'denied';
   const scope = window as unknown as {
     dataLayer?: unknown[];
     gtag?: (...args: unknown[]) => void;
@@ -61,7 +66,11 @@ function pushConsent({ analytics, marketing }: ConsentChoice) {
     layer.push(['consent', 'update', signals]);
   }
 
-  layer.push({ event: 'cookie_consent_update', analytics_consent: analytics, marketing_consent: marketing });
+  layer.push({
+    event: 'cookie_consent_update',
+    analytics_consent: analytics,
+    marketing_consent: marketing,
+  });
 
   if (analytics) {
     loadGoogleAnalytics();
@@ -82,7 +91,11 @@ function readConsent(): StoredConsent | null {
 
 function saveConsent(choice: ConsentChoice) {
   try {
-    const stored: StoredConsent = { ...choice, version: CONSENT_VERSION, date: new Date().toISOString() };
+    const stored: StoredConsent = {
+      ...choice,
+      version: CONSENT_VERSION,
+      date: new Date().toISOString(),
+    };
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
   } catch {
     /* localStorage indisponibil (mod privat) — consimțământul rămâne valabil doar în sesiune. */
@@ -97,7 +110,13 @@ interface ToggleProps {
   onChange?: (value: boolean) => void;
 }
 
-function ConsentToggle({ label, description, checked, disabled, onChange }: ToggleProps) {
+function ConsentToggle({
+  label,
+  description,
+  checked,
+  disabled,
+  onChange,
+}: ToggleProps) {
   return (
     <label className="flex cursor-pointer items-start gap-3 border-t border-line pt-4 first:border-0 first:pt-0">
       <input
@@ -108,8 +127,12 @@ function ConsentToggle({ label, description, checked, disabled, onChange }: Togg
         className="mt-[3px] h-4 w-4 shrink-0 accent-wine disabled:opacity-50"
       />
       <span className="block">
-        <span className="block text-[12px] tracking-[0.08em] text-ink uppercase">{label}</span>
-        <span className="mt-1 block text-[12px] leading-[1.7] text-muted">{description}</span>
+        <span className="block text-[12px] tracking-[0.08em] text-ink uppercase">
+          {label}
+        </span>
+        <span className="mt-1 block text-[12px] leading-[1.7] text-muted">
+          {description}
+        </span>
       </span>
     </label>
   );
@@ -154,16 +177,18 @@ export function CookieConsent({ onSettled }: CookieConsentProps = {}) {
     return () => window.removeEventListener(OPEN_PREFERENCES_EVENT, open);
   }, []);
 
-
-  const decide = useCallback((choice: ConsentChoice) => {
-    saveConsent(choice);
-    pushConsent(choice);
-    setAnalytics(choice.analytics);
-    setMarketing(choice.marketing);
-    setShowPreferences(false);
-    setVisible(false);
-    onSettled?.();
-  }, [onSettled]);
+  const decide = useCallback(
+    (choice: ConsentChoice) => {
+      saveConsent(choice);
+      pushConsent(choice);
+      setAnalytics(choice.analytics);
+      setMarketing(choice.marketing);
+      setShowPreferences(false);
+      setVisible(false);
+      onSettled?.();
+    },
+    [onSettled],
+  );
 
   if (!mounted || !visible) {
     return null;
@@ -178,14 +203,26 @@ export function CookieConsent({ onSettled }: CookieConsentProps = {}) {
         aria-describedby="cookie-consent-description"
         className="pointer-events-auto w-full max-w-[760px] border border-line bg-ivory p-6 shadow-[0_18px_45px_rgba(24,53,62,0.16)] md:p-8"
       >
-        <p className="text-[10px] tracking-[0.22em] text-accent uppercase">Confidențialitate</p>
-        <h2 id="cookie-consent-title" className="mt-3 font-serif text-[22px] leading-[1.3] text-ink md:text-[26px]">
+        <p className="text-[10px] tracking-[0.22em] text-accent uppercase">
+          Confidențialitate
+        </p>
+        <h2
+          id="cookie-consent-title"
+          className="mt-3 font-serif text-[22px] leading-[1.3] text-ink md:text-[26px]"
+        >
           Alegi tu ce cookie-uri folosim
         </h2>
-        <p id="cookie-consent-description" className="mt-3 text-[13px] leading-[1.8] text-muted">
-          Folosim cookie-uri strict necesare pentru funcționarea site-ului. Pentru statistici și marketing avem nevoie de
-          acordul tău. Poți schimba alegerea oricând din footer. Detalii în{' '}
-          <Link className="text-wine underline underline-offset-2 hover:opacity-70" to="/politica-de-confidentialitate">
+        <p
+          id="cookie-consent-description"
+          className="mt-3 text-[13px] leading-[1.8] text-muted"
+        >
+          Folosim cookie-uri strict necesare pentru funcționarea site-ului.
+          Pentru statistici și marketing avem nevoie de acordul tău. Poți
+          schimba alegerea oricând din footer. Detalii în{' '}
+          <Link
+            className="text-wine underline underline-offset-2 hover:opacity-70"
+            to="/politica-de-confidentialitate"
+          >
             Politica de confidențialitate
           </Link>
           .
