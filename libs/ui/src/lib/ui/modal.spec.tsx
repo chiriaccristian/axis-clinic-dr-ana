@@ -25,6 +25,16 @@ describe('Modal', () => {
 
     expect(screen.getByRole('dialog', { name: 'Solicitare' })).toBeTruthy();
   });
+
+  it('accepts extra panel classes', () => {
+    render(
+      <Modal onClose={() => undefined} label="Promo" className="p-0!">
+        <p>Conținut</p>
+      </Modal>,
+    );
+
+    expect(screen.getByRole('dialog').className).toContain('p-0!');
+  });
 });
 
 describe('TextField', () => {

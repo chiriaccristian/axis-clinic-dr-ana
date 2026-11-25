@@ -115,7 +115,12 @@ function ConsentToggle({ label, description, checked, disabled, onChange }: Togg
   );
 }
 
-export function CookieConsent() {
+export interface CookieConsentProps {
+  /** Called once a consent choice exists (already stored, or just made). */
+  onSettled?: () => void;
+}
+
+export function CookieConsent({ onSettled }: CookieConsentProps = {}) {
   const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
   const [showPreferences, setShowPreferences] = useState(false);
@@ -130,6 +135,7 @@ export function CookieConsent() {
       setAnalytics(stored.analytics);
       setMarketing(stored.marketing);
       pushConsent(stored);
+      onSettled?.();
     } else {
       setVisible(true);
     }
@@ -156,7 +162,8 @@ export function CookieConsent() {
     setMarketing(choice.marketing);
     setShowPreferences(false);
     setVisible(false);
-  }, []);
+    onSettled?.();
+  }, [onSettled]);
 
   if (!mounted || !visible) {
     return null;

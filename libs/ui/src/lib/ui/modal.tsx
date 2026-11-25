@@ -6,6 +6,7 @@ import {
   useId,
   useRef,
 } from 'react';
+import { cn } from '../utils/cn';
 
 export interface ModalProps {
   children: ReactNode;
@@ -13,6 +14,10 @@ export interface ModalProps {
   closeLabel?: string;
   /** Accessible name of the dialog. */
   label?: string;
+  /** Extra classes for the dialog panel (size, padding). */
+  className?: string;
+  /** Extra classes for the close button. */
+  closeButtonClassName?: string;
 }
 
 const focusableSelector =
@@ -24,6 +29,8 @@ export function Modal({
   onClose,
   closeLabel = 'Închide',
   label = 'Formular de contact',
+  className,
+  closeButtonClassName,
 }: ModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const titleId = useId();
@@ -33,9 +40,8 @@ export function Modal({
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
 
-    const first = dialogRef.current?.querySelector<HTMLElement>(
-      focusableSelector,
-    );
+    const first =
+      dialogRef.current?.querySelector<HTMLElement>(focusableSelector);
     (first ?? dialogRef.current)?.focus();
 
     return () => {
@@ -93,13 +99,19 @@ export function Modal({
         aria-modal="true"
         aria-labelledby={titleId}
         tabIndex={-1}
-        className="relative w-[min(480px,100%)] bg-ivory p-10 text-wine"
+        className={cn(
+          'relative w-[min(480px,100%)] bg-ivory p-10 text-wine',
+          className,
+        )}
       >
         <button
           type="button"
           aria-label={closeLabel}
           onClick={onClose}
-          className="absolute top-[14px] right-[18px] cursor-pointer border-0 bg-none text-[24px] text-muted"
+          className={cn(
+            'absolute top-[14px] right-[18px] cursor-pointer border-0 bg-none text-[24px] text-muted',
+            closeButtonClassName,
+          )}
         >
           <span aria-hidden="true">×</span>
         </button>
